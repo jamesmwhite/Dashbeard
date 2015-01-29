@@ -31,7 +31,9 @@ class BusController < ApplicationController
 			puts e
 		end
 
-		
+		if htmlresp.empty?
+			htmlresp = "No data available, retrying..."
+		end
 	 	render :json => htmlresp
 		
 	end

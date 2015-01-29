@@ -13,3 +13,11 @@
  *= require_tree .
  *= require_self
  */
+
+ th {
+    background-color: #0066FF;
+    color: white;
+    height: 22px;
+    line-height: 22px;
+
+}

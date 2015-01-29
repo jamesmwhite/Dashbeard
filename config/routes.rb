@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   get '/train/', to: 'train#station'
   get '/bus/', to: 'bus#station'
+  get '/stock/', to: 'stock#quote'
 
 
 

@@ -8,7 +8,6 @@ class TrainController < ApplicationController
 		url = "http://www.irishrail.ie/realtime/station-updates.jsp?code=TARA"
 		begin
 			result = Net::HTTP.get(URI.parse(url))	
-			# result = File.read("/Users/jimmy/testdata.html")
 		rescue Exception => e
 			
 		end
@@ -34,6 +33,9 @@ class TrainController < ApplicationController
 			end 
 		end
 		
+		if responseres.empty?
+			responseres = "No data available, retrying..."
+		end
 	 	render :text => responseres
 		
 	end
