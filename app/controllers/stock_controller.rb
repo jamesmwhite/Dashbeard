@@ -17,11 +17,11 @@ class StockController < ApplicationController
 		curprice = parsed["query"]["results"]["quote"]["LastTradePriceOnly"]
 		change = parsed["query"]["results"]["quote"]["Change"]
 		if change.include? "-"
-			change = "<font size=\"10\" color=\"red\">(#{change})</font>"
+			change = "<font class=\"stockred\">(#{change})</font>"
 		else
-			change = "<font size=\"10\" color=\"green\">(#{change})</font>"
+			change = "<font class=\"stockgreen\">(#{change})</font>"
 		end
-		htmlresp = "<font size=\"10\"> FEYE</font> <font size=\"10\" color=\"blue\">#{curprice}</font> #{change}"
+		htmlresp = "<div class=\"stock\"> FEYE #{curprice} #{change}</div>"
 		if htmlresp.empty?
 			htmlresp = "No data available, retrying..."
 		end

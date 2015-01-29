@@ -14,10 +14,71 @@
  *= require_self
  */
 
- th {
-    background-color: #0066FF;
+ * {
+    font-family: Verdana;
+    font-size: 15px;
     color: white;
-    height: 22px;
-    line-height: 22px;
+  }
 
+  body {
+    background-color: #000000;
+}
+
+ th {
+    background-color: #B40404;
+    color: white;
+    height: 32px;
+    line-height: 32px;
+    font-size: 28px;
+}
+
+.rssTitle{
+	background-color: #B40404;
+	font-family: Verdana;
+    color: white;
+    height: 32px;
+    line-height: 32px;	
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 0px;
+    margin-top: 1px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 1px;
+    padding-bottom: 1px;
+}
+
+.rssHeader{
+	background-color: #0B3861;
+    color: white;
+    font-size: 22px;
+    padding: 4px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+
+.rssDescription{
+	padding-top: 4px;
+	padding-left: 4px;
+    font-size: 18px;
+    /*background-color: #F6E3CE;*/
+    background-color: #F79F81;
+    color: black;
+}
+
+.stock{
+	font-size: 20px;
+}
+
+.stockred{
+	color: red;
+}
+
+.stockgreen{
+	color: red;
+}
+
+.livetime{
+	background-color: #F79F81;
 }

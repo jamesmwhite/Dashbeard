@@ -28,7 +28,7 @@ class TrainController < ApplicationController
 					stationDeptTime = stationDeptTime[0].sub(/.+?time">/m, '')
 					stationDeptTime = stationDeptTime.sub(/.+?time">/m, '')
 					stationDeptTime = stationDeptTime.sub(/<\/td>.+/m, '') #this is the departure time of the train from tara street
-					responseres = "#{responseres} <font color=\"blue\">#{singletrain}</font> departing from Tara Street at <font color=\"red\">#{stationDeptTime}</font></br><br>" 
+					responseres = "#{responseres} <font color=\"blue\">#{singletrain}</font> departing at <font class=\"livetime\">#{stationDeptTime}</font></br><br>" 
 				end
 			end 
 		end
