@@ -17,7 +17,7 @@
  * {
     font-family: Verdana;
     font-size: 15px;
-    color: white;
+    color: black;
   }
 
   body {
@@ -51,19 +51,19 @@
 .rssHeader{
 	background-color: #0B3861;
     color: white;
-    font-size: 22px;
+    font-size: 20px;
     padding: 4px;
     margin-top: 0px;
     margin-bottom: 0px;
 }
 
 
-.rssDescription{
+.infoSurround{
 	padding-top: 4px;
 	padding-left: 4px;
     font-size: 18px;
     /*background-color: #F6E3CE;*/
-    background-color: #F79F81;
+    background-color: #D8D8D8;
     color: black;
 }
 
@@ -80,7 +80,7 @@
 }
 
 .livetime{
-	background-color: #8A0808;
+	background-color: #DBA901;
 }
 
 .busheader{

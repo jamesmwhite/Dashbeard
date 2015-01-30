@@ -21,7 +21,7 @@ class StockController < ApplicationController
 		else
 			change = "<font class=\"stockgreen\">(#{change})</font>"
 		end
-		htmlresp = "<div class=\"stock\"> FEYE #{curprice} #{change}</div>"
+		htmlresp = "<div class=\"stock\"> FEYE #{curprice} #{change}</div></br></br>"
 		if htmlresp.empty?
 			htmlresp = "No data available, retrying..."
 		end

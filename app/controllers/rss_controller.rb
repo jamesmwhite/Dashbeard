@@ -13,7 +13,7 @@ class RssController < ApplicationController
 		  feed = RSS::Parser.parse(rss)
 		  htmlresp = "<tr><td id=\"rss\" width=\"60%\" valign=\"top\" rowspan=\"30\"><div align=\"center\" class=\"rssTitle\">Security News</div><div class=\"jimmy marquee\" id=\"rssdiv\"><span>"
 		  feed.items.each do |item|
-		    htmlresp = "#{htmlresp} <h3 class=\"rssHeader\">#{item.title}</h3> <div class=\"rssDescription\">#{item.description}</br></br></div>"
+		    htmlresp = "#{htmlresp} <h3 class=\"rssHeader\">#{item.title}</h3> <div class=\"infoSurround\">#{item.description}</br></br></div>"
 		  end
 		end
 		htmlresp = "#{htmlresp}</span></div></td></tr>"
