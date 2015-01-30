@@ -19,7 +19,7 @@ class BusController < ApplicationController
 			# puts response.body
 			# puts parsed.class
 			actuals = parsed["actual"]
-			htmlresp = "<table><tr><td>Destination</td><td>Planned Time</td><td>Actual Dept Time</td></tr>"
+			htmlresp = "<table><tr class=\"busheader\"><td>Destination</td><td>Planned Time</td><td>Actual Dept Time</td></tr>"
 			for item in actuals
 				htmlresp = "#{htmlresp} <tr><td>#{item["direction"]}</td><td align=\"center\">#{item["plannedTime"]}</td><td align=\"center\"><font class=\"livetime\">#{item["actualTime"]}</font></td></tr>"
 			end

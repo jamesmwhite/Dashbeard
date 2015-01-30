@@ -80,5 +80,9 @@
 }
 
 .livetime{
-	background-color: #F79F81;
+	background-color: #8A0808;
+}
+
+.busheader{
+	font-weight: bold;
 }

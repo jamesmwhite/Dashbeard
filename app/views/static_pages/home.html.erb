@@ -102,12 +102,6 @@ var set_delay = 60000,
         })
         .done(function (response) {
             $("#rss").parent().replaceWith(response);
-            $("#rssdiv").on('scroll', function(){
-            if( $("#rssdiv").scrollTop() > $(document).height() - $("#rssdiv").height() ) {
-                $("#load-more").click();
-            }
-        }).scroll();
-            
         })
         .always(function () {
             setTimeout(calloutRss, set_delay);
