@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  rssfeed: MyString
+  stocksymbol: MyString
+  weathercode: MyString
+  trainstationcode: MyString
+  busstationcode: 1
+  refreshfrequency: 1
+
+two:
+  rssfeed: MyString
+  stocksymbol: MyString
+  weathercode: MyString
+  trainstationcode: MyString
+  busstationcode: 1
+  refreshfrequency: 1

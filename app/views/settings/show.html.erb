@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Rssfeed:</strong>
+  <%= @setting.rssfeed %>
+</p>
+
+<p>
+  <strong>Stocksymbol:</strong>
+  <%= @setting.stocksymbol %>
+</p>
+
+<p>
+  <strong>Weathercode:</strong>
+  <%= @setting.weathercode %>
+</p>
+
+<p>
+  <strong>Trainstationcode:</strong>
+  <%= @setting.trainstationcode %>
+</p>
+
+<p>
+  <strong>Busstationcode:</strong>
+  <%= @setting.busstationcode %>
+</p>
+
+<p>
+  <strong>Refreshfrequency:</strong>
+  <%= @setting.refreshfrequency %>
+</p>
+
+<%= link_to 'Edit', edit_setting_path(@setting) %> |
+<%= link_to 'Back', settings_path %>
