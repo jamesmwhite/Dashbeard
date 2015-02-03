@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :settings
+
   root 'static_pages#home'
 
   get '/train/', to: 'train#station'

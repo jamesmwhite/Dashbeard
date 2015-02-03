@@ -1,0 +1,41 @@
+<%= form_for(@setting) do |f| %>
+  <% if @setting.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@setting.errors.count, "error") %> prohibited this setting from being saved:</h2>
+
+      <ul>
+      <% @setting.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :rssfeed %><br>
+    <%= f.text_field :rssfeed %>
+  </div>
+  <div class="field">
+    <%= f.label :stocksymbol %><br>
+    <%= f.text_field :stocksymbol %>
+  </div>
+  <div class="field">
+    <%= f.label :weathercode %><br>
+    <%= f.text_field :weathercode %>
+  </div>
+  <div class="field">
+    <%= f.label :trainstation %><br>
+    <%= f.text_field :trainstation %>
+  </div>
+  <div class="field">
+    <%= f.label :busstopcode %><br>
+    <%= f.number_field :busstopcode %>
+  </div>
+  <div class="field">
+    <%= f.label :refreshtime %><br>
+    <%= f.number_field :refreshtime %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

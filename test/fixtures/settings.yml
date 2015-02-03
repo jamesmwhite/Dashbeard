@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  rssfeed: 
+  stocksymbol: 
+  weathercode: 
+  trainstation: 
+  busstopcode: 1
+  refreshtime: 1
+
+two:
+  rssfeed: 
+  stocksymbol: 
+  weathercode: 
+  trainstation: 
+  busstopcode: 1
+  refreshtime: 1

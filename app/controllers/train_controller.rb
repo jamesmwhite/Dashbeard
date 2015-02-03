@@ -5,7 +5,17 @@ class TrainController < ApplicationController
 
 	def station
 		require 'net/http'
-		url = "http://www.irishrail.ie/realtime/station-updates.jsp?code=TARA"
+
+		trainCode = 'TARA' # Tara street station default
+		# Pulling train station code from settings
+		begin
+			setting = Setting.find(1)
+			trainCode = setting.trainstation
+		rescue Exception => ee
+			puts ee
+		end
+
+		url = "http://www.irishrail.ie/realtime/station-updates.jsp?code=#{trainCode}"
 		begin
 			result = Net::HTTP.get(URI.parse(url))	
 		rescue Exception => e
