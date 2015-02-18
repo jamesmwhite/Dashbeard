@@ -27,8 +27,12 @@ class TrainController < ApplicationController
 		responseres = ""
 
 		regresults = result.scan(/((Train|arrow|dart|icr).+?\/tbody>)/mi)
-		puts regresults
+		# puts regresults
+		count = 0
 		for full in regresults
+			if count >9
+				break
+			end
 			singletrain = full[0].scan(/((Train|arrow|dart|icr).+?td>)/mi)[0]
 			if not singletrain.empty?
 				singletrain = singletrain[0].gsub(/(\b.+) Service /mi, '')
@@ -40,6 +44,7 @@ class TrainController < ApplicationController
 					stationDeptTime = stationDeptTime.sub(/.+?time">/m, '')
 					stationDeptTime = stationDeptTime.sub(/<\/td>.+/m, '') #this is the departure time of the train from tara street
 					responseres = "#{responseres} #{singletrain} departing at <font class=\"livetime\">#{stationDeptTime}</font></br><br>" 
+					count = count + 1
 				end
 			end 
 		end
