@@ -1,5 +1,12 @@
 body {
-  background-color: #fff;
+
+   background: #282537;
+ background-image: -webkit-radial-gradient(top, circle cover, #3c3b52 0%, #252233 80%);
+ background-image: -moz-radial-gradient(top, circle cover, #3c3b52 0%, #252233 80%);
+ background-image: -o-radial-gradient(top, circle cover, #3c3b52 0%, #252233 80%);
+ background-image: radial-gradient(top, circle cover, #3c3b52 0%, #252233 80%);
+
+
   color: #333;
   font-family: verdana, arial, helvetica, sans-serif;
   font-size: 13px;

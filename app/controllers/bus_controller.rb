@@ -30,7 +30,7 @@ class BusController < ApplicationController
 			actuals = parsed["actual"]
 			htmlresp = "<table><tr class=\"busheader\"><td>Destination</td><td>Planned Time</td><td>Actual Dept Time</td></tr>"
 			for item in actuals
-				htmlresp = "#{htmlresp} <tr><td>#{item["direction"]}</td><td align=\"center\">#{item["plannedTime"]}</td><td align=\"center\"><font class=\"livetime\">#{item["actualTime"]}</font></td></tr>"
+				htmlresp = "#{htmlresp} <tr><td  class=\"busText\">#{item["direction"]}</td><td class=\"busText\" align=\"center\">#{item["plannedTime"]}</td><td align=\"center\"><font class=\"livetime\">#{item["actualTime"]}</font></td></tr>"
 			end
 			htmlresp = "#{htmlresp} </table>"
 
