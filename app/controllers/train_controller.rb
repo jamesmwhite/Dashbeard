@@ -30,7 +30,7 @@ class TrainController < ApplicationController
 		# puts regresults
 		count = 0
 		for full in regresults
-			if count >9
+			if count >15
 				break
 			end
 			singletrain = full[0].scan(/((Train|arrow|dart|icr).+?td>)/mi)[0]

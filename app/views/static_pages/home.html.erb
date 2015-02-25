@@ -1,9 +1,81 @@
 <script type="text/javascript">document.write('\x3Cscript type="text/javascript" src="' + ('https:' == document.location.protocol ? 'https://' : 'http://') + 'feed.mikle.com/js/rssmikle.js">\x3C/script>');</script>
+<%= javascript_include_tag "jClocksGMT"%>
+<%= javascript_include_tag "jquery.rotate"%>
+
 <!-- <h1>Info </h1> -->
+
+
+<table width="100%">
+<tr>
+<td>
+<div id="clock_bangelore" class="clock_container">
+    <div class="lbl">Bangelore</div>
+    <div class="clockHolder">
+        <div class="rotatingWrapper"><%= image_tag("clock_hour.png", class:"hour") %></div>
+        <div class="rotatingWrapper"><%= image_tag("clock_min.png", class:"min") %></div>
+        <div class="rotatingWrapper"><%= image_tag("clock_sec.png", class:"sec") %></div>
+        <%= image_tag("clock_face.png", class:"clock") %>
+    </div> 
+    <div class="digital">
+        <span class="hr"></span><span class="minute"></span> <span class="period"></span>
+    </div>
+</div>
+</td>
+<td>
+<div id="clock_dub" class="clock_container">
+    <div class="lbl">Dublin</div>
+    <div class="clockHolder">
+        <div class="rotatingWrapper"><%= image_tag("clock_hour.png", class:"hour") %></div>
+        <div class="rotatingWrapper"><%= image_tag("clock_min.png", class:"min") %></div>
+        <div class="rotatingWrapper"><%= image_tag("clock_sec.png", class:"sec") %></div>
+        <%= image_tag("clock_face.png", class:"clock") %>
+    </div> 
+    <div class="digital">
+        <span class="hr"></span><span class="minute"></span> <span class="period"></span>
+    </div>
+</div>
+</td>
+<td>
+<div id="clock_dc" class="clock_container">
+    <div class="lbl">Washington, DC</div>
+    <div class="clockHolder">
+        <div class="rotatingWrapper"><%= image_tag("clock_hour.png", class:"hour") %></div>
+        <div class="rotatingWrapper"><%= image_tag("clock_min.png", class:"min") %></div>
+        <div class="rotatingWrapper"><%= image_tag("clock_sec.png", class:"sec") %></div>
+        <%= image_tag("clock_face.png", class:"clock") %>
+    </div> 
+    <div class="digital">
+        <span class="hr"></span><span class="minute"></span> <span class="period"></span>
+    </div>
+</div>
+</td>
+
+<td>
+<div id="clock_cali" class="clock_container">
+    <div class="lbl">California</div>
+    <div class="clockHolder">
+        <div class="rotatingWrapper"><%= image_tag("clock_hour.png", class:"hour") %></div>
+        <div class="rotatingWrapper"><%= image_tag("clock_min.png", class:"min") %></div>
+        <div class="rotatingWrapper"><%= image_tag("clock_sec.png", class:"sec") %></div>
+        <%= image_tag("clock_face.png", class:"clock") %>
+    </div> 
+    <div class="digital">
+        <span class="hr"></span><span class="minute"></span> <span class="period"></span>
+    </div>
+</div>
+</td>
+</tr>
+</table>
+
+
+
 <div>
 <table>
+
 <tr>
+
 <td valign="top" rowspan="10" id="rss">Loading...</td>
+
 </tr>
 <th>Stock</th>
 <tr>
@@ -112,11 +184,8 @@ calloutRss();
 </script>
 
 <script>
-function myScroll()
-{
-  x = document.getElementById("rss");
-  h= x.clientHeight;
-  self.scrollTo(0,h);
-}
-myScroll();
+$("#clock_dc").jClocksGMT({offset: '-5', analog: true, digital: true, hour24: false});
+$("#clock_dub").jClocksGMT({offset: '0', analog: true, digital: true, hour24: false});
+$("#clock_cali").jClocksGMT({offset: '-8', analog: true, digital: true, hour24: false});
+$("#clock_bangelore").jClocksGMT({offset: '+5.5', analog: true, digital: true, hour24: false});
 </script>

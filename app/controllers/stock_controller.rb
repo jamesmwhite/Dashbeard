@@ -46,7 +46,7 @@ class StockController < ApplicationController
 			if change2.include? "-"
 				change2 = "<font class=\"stockred\">(#{change})</font>"
 			else
-				change2 = "<font class=\"stockgreen\">(#{change})</font>"
+				change2 = "<font class=\"stockgreen\">(#{change2})</font>"
 			end
 			htmlresp = "<div class=\"stock\"> #{stockSymbol} #{curprice} #{change}  #{stockSymbol2} #{curprice2} #{change2} </div></br>"
 			
