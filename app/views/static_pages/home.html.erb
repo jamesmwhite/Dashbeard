@@ -3,8 +3,6 @@
 <%= javascript_include_tag "jquery.rotate"%>
 
 <!-- <h1>Info </h1> -->
-
-
 <table width="100%">
 <tr>
 <td>
@@ -67,8 +65,6 @@
 </tr>
 </table>
 
-
-
 <div>
 <table>
 
@@ -91,25 +87,20 @@
 </td>
 </tr>
 
-<th>Tara Street Departures</th>
+<th>Travel Departures</th>
 <tr>
 <td valign="top">
 <div id="dynamic_train" class="infoSurroundTransport">Loading...</div>
 </td>
 </tr>
-<th>Busaras Departures</th>
-<tr>
-<td valign="top">
-<div id="dynamic_bus" class="infoSurroundTransport">Loading...</div>
-</td>
-</tr>
+
 </table>
 <a href="/settings">Settings</a>
 </div>
 
-
 <script>
-var set_delay = 60000,
+var travel_delay = 10000;
+
     calloutTrain = function () {
         $.ajax({
             url: "/train",
@@ -120,7 +111,21 @@ var set_delay = 60000,
             $("#dynamic_train").html(response);
         })
         .always(function () {
-            setTimeout(calloutTrain, set_delay);
+            setTimeout(calloutBus, travel_delay);
+        });
+    };
+
+    calloutBus = function () {
+        $.ajax({
+            url: "/bus",
+            dataType: "text",
+            cache: false
+        })
+        .done(function (response) {
+            $("#dynamic_train").html(response);
+        })
+        .always(function () {
+            setTimeout(calloutTrain, travel_delay);
         });
     };
 
@@ -129,25 +134,7 @@ calloutTrain();
 </script>
 
 <script>
-var set_delay = 60000,
-    calloutBus = function () {
-        $.ajax({
-            url: "/bus",
-		    dataType: "text",
-		    cache: false
-        })
-        .done(function (response) {
-            $("#dynamic_bus").html(response);
-        })
-        .always(function () {
-            setTimeout(calloutBus, set_delay);
-        });
-    };
-calloutBus();
-</script>
-
-<script>
-var set_delay = 60000,
+var stock_delay = 60000,
     calloutStock = function () {
         $.ajax({
             url: "/stock",
@@ -158,12 +145,11 @@ var set_delay = 60000,
             $("#stock").html(response);
         })
         .always(function () {
-            setTimeout(calloutStock, set_delay);
+            setTimeout(calloutStock, stock_delay);
         });
     };
 calloutStock();
 </script>
-
 
 <script>
 var set_delay = 60000,

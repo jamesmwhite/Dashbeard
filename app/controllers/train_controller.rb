@@ -24,13 +24,13 @@ class TrainController < ApplicationController
 		stationname = "Tara Street"
 		# removing images, cos it throws errors on my console, boo
 		result = result.gsub(/<img src.+?>/m, '')
-		responseres = ""
+		responseres = "<h2> #{stationname} departures</h2>"
 
 		regresults = result.scan(/((Train|arrow|dart|icr).+?\/tbody>)/mi)
 		# puts regresults
 		count = 0
 		for full in regresults
-			if count >15
+			if count >50 #put a high number here to not skip anymore, leaving code until certain
 				break
 			end
 			singletrain = full[0].scan(/((Train|arrow|dart|icr).+?td>)/mi)[0]
