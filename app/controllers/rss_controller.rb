@@ -10,8 +10,10 @@ class RssController < ApplicationController
 		rssUrl = "http://threatpost.com/feed" # Default value for RSS
 		# Pulling rss URL from settings
 		begin
-			setting = Setting.find(1)
-			rssUrl = setting.rssfeed
+			setting = Setting.take
+			if not setting.rssfeed.empty?
+				rssUrl = setting.rssfeed
+			end
 		rescue Exception => ee
 			puts ee
 		end
