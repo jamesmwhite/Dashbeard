@@ -66,12 +66,13 @@ class SettingsController < ApplicationController
     firstSetting = Setting.take
     notices = firstSetting.notices
 
-    htmlresp = "<tr><td id=\"rss\" width=\"60%\" valign=\"top\" rowspan=\"30\"><div align=\"center\" class=\"rssTitle\">This Weeks Site News</div><div class=\"jimmy marquee\" id=\"rssdiv\"><span>"
+    htmlresp = "<tr><td id=\"rss\" width=\"60%\" valign=\"top\" rowspan=\"30\"><div align=\"center\" class=\"rssTitle\">This Weeks Site News</div>"
     # for notice in notices
+    htmlresp = "#{htmlresp}<div class=\"noticeContainer\">"
     notices.each_line do |notice|
-      htmlresp = "#{htmlresp} <h3 class=\"rssHeader\">#{notice}</h3> </br></br></div>"
+      htmlresp = "#{htmlresp} <h3 class=\"noticeItem\">#{notice}</h3> </br><hr>"
     end
-    htmlresp = "#{htmlresp}</span></div></td></tr>"
+    htmlresp = "#{htmlresp}</div></td></tr>"
 
     render :json => htmlresp
   end
