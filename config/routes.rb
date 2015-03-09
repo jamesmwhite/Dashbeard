@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   get '/bus/', to: 'bus#station'
   get '/stock/', to: 'stock#quote'
   get '/rss/', to: 'rss#feed'
+  get '/notices/', to: 'settings#listNotices'
 
 
 

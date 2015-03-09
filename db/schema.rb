@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150130124116) do
+ActiveRecord::Schema.define(version: 20150309092302) do
 
   create_table "settings", force: :cascade do |t|
     t.string   "rssfeed"
@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 20150130124116) do
     t.integer  "refreshtime"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+    t.text     "notices"
   end
 
 end

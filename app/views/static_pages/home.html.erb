@@ -20,6 +20,20 @@
 </div>
 </td>
 <td>
+<div id="clock_dresden" class="clock_container">
+    <div class="lbl">Dresden</div>
+    <div class="clockHolder">
+        <div class="rotatingWrapper"><%= image_tag("clock_hour.png", class:"hour") %></div>
+        <div class="rotatingWrapper"><%= image_tag("clock_min.png", class:"min") %></div>
+        <div class="rotatingWrapper"><%= image_tag("clock_sec.png", class:"sec") %></div>
+        <%= image_tag("clock_face.png", class:"clock") %>
+    </div> 
+    <div class="digital">
+        <span class="hr"></span><span class="minute"></span> <span class="period"></span>
+    </div>
+</div>
+</td>
+<td>
 <div id="clock_dub" class="clock_container">
     <div class="lbl">Dublin</div>
     <div class="clockHolder">
@@ -68,7 +82,7 @@
 <div>
 <table>
 
-<tr>
+<tr id="rss2">
 
 <td valign="top" rowspan="10" id="rss">Loading...</td>
 
@@ -152,7 +166,9 @@ calloutStock();
 </script>
 
 <script>
-var set_delay = 60000,
+
+var rssDelay = 10000;
+
     calloutRss = function () {
         $.ajax({
             url: "/rss",
@@ -163,15 +179,31 @@ var set_delay = 60000,
             $("#rss").parent().replaceWith(response);
         })
         .always(function () {
-            setTimeout(calloutRss, set_delay);
+            setTimeout(calloutNotices, rssDelay);
         });
     };
+
+    calloutNotices = function () {
+        $.ajax({
+            url: "/notices",
+            dataType: "text",
+            cache: false
+        })
+        .done(function (response) {
+            $("#rss").parent().replaceWith(response);
+        })
+        .always(function () {
+            setTimeout(calloutRss, rssDelay);
+        });
+    };
+
 calloutRss();
 </script>
 
 <script>
-$("#clock_dc").jClocksGMT({offset: '-5', analog: true, digital: true, hour24: false});
+$("#clock_dc").jClocksGMT({offset: '-4', analog: true, digital: true, hour24: false});
 $("#clock_dub").jClocksGMT({offset: '0', analog: true, digital: true, hour24: false});
 $("#clock_cali").jClocksGMT({offset: '-8', analog: true, digital: true, hour24: false});
 $("#clock_bangelore").jClocksGMT({offset: '+5.5', analog: true, digital: true, hour24: false});
+$("#clock_dresden").jClocksGMT({offset: '1', analog: true, digital: true, hour24: false});
 </script>

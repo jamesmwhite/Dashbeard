@@ -17,8 +17,10 @@ class BusController < ApplicationController
 
 			stopNum = 13500 # busaras default			
 			begin
-				setting = Setting.find(1)
-				stopNum = setting.busstopcode
+				setting = Setting.take
+				if not setting.busstopcode.empty?
+					stopNum = setting.busstopcode
+				end
 			rescue Exception => ee
 				puts ee
 			end

@@ -9,8 +9,10 @@ class TrainController < ApplicationController
 		trainCode = 'TARA' # Tara street station default
 		# Pulling train station code from settings
 		begin
-			setting = Setting.find(1)
-			trainCode = setting.trainstation
+			setting = Setting.take
+			if not setting.trainstation.empty?
+				trainCode = setting.trainstation
+			end
 		rescue Exception => ee
 			puts ee
 		end

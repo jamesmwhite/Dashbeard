@@ -11,6 +11,7 @@
       <th>Trainstation</th>
       <th>Busstopcode</th>
       <th>Refreshtime</th>
+      <th>Notices</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -24,6 +25,7 @@
         <td><%= setting.trainstation %></td>
         <td><%= setting.busstopcode %></td>
         <td><%= setting.refreshtime %></td>
+        <td><%= setting.notices %></td>
         <td><%= link_to 'Show', setting %></td>
         <td><%= link_to 'Edit', edit_setting_path(setting) %></td>
         <td><%= link_to 'Destroy', setting, method: :delete, data: { confirm: 'Are you sure?' } %></td>
