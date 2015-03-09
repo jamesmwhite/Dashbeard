@@ -30,7 +30,7 @@ class BusController < ApplicationController
 			parsed = JSON.parse(response.body)
 
 			actuals = parsed["actual"]
-			htmlresp = "<h2>Busaras Depatures</h2><table><tr class=\"busheader\"><td>Destination</td><td>Planned Time</td><td>Actual Dept Time</td></tr>"
+			htmlresp = "<h2>Busaras Departures</h2><table><tr class=\"busheader\"><td>Destination</td><td>Planned Time</td><td>Actual Dept Time</td></tr>"
 			for item in actuals
 				htmlresp = "#{htmlresp} <tr><td  class=\"busText\">#{item["direction"]}</td><td class=\"busText\" align=\"center\">#{item["plannedTime"]}</td><td align=\"center\"><font class=\"livetime\">#{item["actualTime"]}</font></td></tr>"
 			end
