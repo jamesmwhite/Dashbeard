@@ -92,7 +92,12 @@ var travel_delay = 10000;
 		    cache: false
         })
         .done(function (response) {
-            $("#dynamic_train").html(response);
+            // $("#dynamic_train").html(response);
+            $("#dynamic_train").fadeOut('slow',function(){
+                $("#dynamic_train").html(response);
+            }).fadeIn('slow');
+
+
         })
         .always(function () {
             setTimeout(calloutBus, travel_delay);
@@ -106,7 +111,10 @@ var travel_delay = 10000;
             cache: false
         })
         .done(function (response) {
-            $("#dynamic_train").html(response);
+            // $("#dynamic_train").html(response);
+            $("#dynamic_train").fadeOut('slow',function(){
+                $("#dynamic_train").html(response);
+            }).fadeIn('slow');
         })
         .always(function () {
             setTimeout(calloutTrain, travel_delay);
@@ -146,7 +154,15 @@ var rssDelay = 10000;
             cache: false
         })
         .done(function (response) {
-            $("#rss").parent().replaceWith(response);
+
+             $("#rss").parent().fadeOut(function() {
+                $("#rss").parent().replaceWith(function() {
+                    return $(response).hide().fadeIn();
+                });
+            });
+
+
+            // $("#rss").parent().replaceWith(response);
         })
         .always(function () {
             setTimeout(calloutNotices, rssDelay);
@@ -160,7 +176,12 @@ var rssDelay = 10000;
             cache: false
         })
         .done(function (response) {
-            $("#rss").parent().replaceWith(response);
+            // $("#rss").parent().replaceWith(response);
+            $("#rss").parent().fadeOut(function() {
+                $("#rss").parent().replaceWith(function() {
+                    return $(response).hide().fadeIn();
+                });
+            });
         })
         .always(function () {
             setTimeout(calloutRss, rssDelay);

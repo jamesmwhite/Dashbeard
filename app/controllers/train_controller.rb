@@ -28,6 +28,8 @@ class TrainController < ApplicationController
 		result = result.gsub(/<img src.+?>/m, '')
 		responseres = "<h2> #{stationname} departures</h2>"
 
+		trainsArr = Array.new 
+
 		regresults = result.scan(/((Train|arrow|dart|icr).+?\/tbody>)/mi)
 		# puts regresults
 		count = 0
@@ -44,12 +46,19 @@ class TrainController < ApplicationController
 				if not stationDeptTime.empty?
 					stationDeptTime = stationDeptTime[0].sub(/.+?time">/m, '')
 					stationDeptTime = stationDeptTime.sub(/.+?time">/m, '')
+					journeyWithoutTime = singletrain.sub(/[0-9][0-9]:[0-9][0-9] - /, '')
 					stationDeptTime = stationDeptTime.sub(/<\/td>.+/m, '') #this is the departure time of the train from tara street
-					responseres = "#{responseres} #{singletrain} departing at <font class=\"livetime\">#{stationDeptTime}</font></br><br>" 
+					trainsArr.push "Departing: <font class=\"livetime\">#{stationDeptTime}</font> - #{journeyWithoutTime}</br><br>"
+					# responseres = "#{responseres} #{singletrain} departing at <font class=\"livetime\">#{stationDeptTime}</font></br><br>" 
 					count = count + 1
 				end
 			end 
 		end
+
+		for train in trainsArr.sort # sorting so trains in order of departure
+			responseres = "#{responseres} #{train}"
+		end
+
 		
 		if responseres.empty?
 			responseres = "No data available, retrying..."
