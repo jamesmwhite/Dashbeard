@@ -122,26 +122,9 @@ var travel_delay = 10000;
     };
 
 // initial call
-calloutTrain();
 </script>
 
-<script>
-var stock_delay = 60000,
-    calloutStock = function () {
-        $.ajax({
-            url: "/stock",
-            dataType: "text",
-            cache: false
-        })
-        .done(function (response) {
-            $("#stock").html(response);
-        })
-        .always(function () {
-            setTimeout(calloutStock, stock_delay);
-        });
-    };
-calloutStock();
-</script>
+
 
 <script>
 
@@ -187,8 +170,23 @@ var rssDelay = 10000;
             setTimeout(calloutRss, rssDelay);
         });
     };
+</script>
 
-calloutRss();
+<script>
+var stock_delay = 60000,
+    calloutStock = function () {
+        $.ajax({
+            url: "/stock",
+            dataType: "text",
+            cache: false
+        })
+        .done(function (response) {
+            $("#stock").html(response);
+        })
+        .always(function () {
+            setTimeout(calloutStock, stock_delay);
+        });
+    };
 </script>
 
 <script>
@@ -197,4 +195,9 @@ $("#clock_dub").jClocksGMT({offset: '0', analog: true, digital: true, hour24: fa
 $("#clock_cali").jClocksGMT({offset: '-8', analog: true, digital: true, hour24: false});
 $("#clock_bangelore").jClocksGMT({offset: '+5.5', analog: true, digital: true, hour24: false});
 $("#clock_dresden").jClocksGMT({offset: '1', analog: true, digital: true, hour24: false});
+
+// initial order of elements on screen to load 
+calloutTrain();
+calloutRss();
+calloutStock();
 </script>
