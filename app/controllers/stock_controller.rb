@@ -14,9 +14,9 @@ class StockController < ApplicationController
 		# Pulling stock symbol from settings
 		begin
 			setting = Setting.take
-			stockSymbol = setting.stockSymbol
+			stockSymbol = setting.stocksymbol
 		rescue Exception => eee
-			# puts eee.backtrace.join("\n")
+			puts eee.backtrace.join("\n")
 		end
 		#hardcoding second symbol now until I update settings to cater for more than one symbol
 		
