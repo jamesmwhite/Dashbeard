@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Stock:</strong>
+  <%= @data_cach.stock %>
+</p>
+
+<p>
+  <strong>Rss:</strong>
+  <%= @data_cach.rss %>
+</p>
+
+<p>
+  <strong>Bus:</strong>
+  <%= @data_cach.bus %>
+</p>
+
+<p>
+  <strong>Train:</strong>
+  <%= @data_cach.train %>
+</p>
+
+<%= link_to 'Edit', edit_data_cach_path(@data_cach) %> |
+<%= link_to 'Back', data_caches_path %>

@@ -11,7 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150309092302) do
+ActiveRecord::Schema.define(version: 20150319111410) do
+
+  create_table "data_caches", force: :cascade do |t|
+    t.string   "stock"
+    t.string   "rss"
+    t.string   "bus"
+    t.string   "train"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.datetime "stockDate"
+    t.datetime "rssDate"
+    t.datetime "trainDate"
+    t.datetime "busDate"
+  end
 
   create_table "settings", force: :cascade do |t|
     t.string   "rssfeed"

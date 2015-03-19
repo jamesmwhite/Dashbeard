@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Data Caches</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Stock</th>
+      <th>Rss</th>
+      <th>Bus</th>
+      <th>Train</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @data_caches.each do |data_cach| %>
+      <tr>
+        <td><%= data_cach.stock %></td>
+        <td><%= data_cach.rss %></td>
+        <td><%= data_cach.bus %></td>
+        <td><%= data_cach.train %></td>
+        <td><%= link_to 'Show', data_cach %></td>
+        <td><%= link_to 'Edit', edit_data_cach_path(data_cach) %></td>
+        <td><%= link_to 'Destroy', data_cach, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Data cache', new_data_cach_path %>

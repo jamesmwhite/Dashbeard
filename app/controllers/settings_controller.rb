@@ -42,6 +42,7 @@ class SettingsController < ApplicationController
   def update
     respond_to do |format|
       if @setting.update(setting_params)
+        DataCache.delete_all
         format.html { redirect_to @setting, notice: 'Setting was successfully updated.' }
         format.json { render :show, status: :ok, location: @setting }
       else

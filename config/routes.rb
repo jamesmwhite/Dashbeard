@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :data_caches
+
   resources :settings
 
   root 'static_pages#home'
@@ -8,6 +10,7 @@ Rails.application.routes.draw do
   get '/stock/', to: 'stock#quote'
   get '/rss/', to: 'rss#feed'
   get '/notices/', to: 'settings#listNotices'
+  get '/clearcache/', to: 'data_caches#clearAll'
 
 
 
