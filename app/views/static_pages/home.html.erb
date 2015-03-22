@@ -9,38 +9,30 @@
 <% end %>
 
 <div>
-<table width="100%">
+<table width="100%" cellpadding="0">
 
 <tr id="rss2">
-
 <td valign="top" rowspan="10" id="rss">Loading...</td>
+<td valign="top"><div align="center" class="rssTitle">Stock</div>
 
-</tr>
-<th>Stock</th>
-<tr>
-<td align="center" valign="top">
-<div id="stock" class="infoSurround">Loading...</div>
-</td>
-</tr>
+<div valign="top" id="stock" class="infoSurround">Loading...</div>
 
-<th>Weather</th>
-<tr>
-<td align="center" valign="top" class="infoSurround">
+<!-- <th>Weather</th> -->
+</br>
+<div align="center" class="rssTitle">Weather</div><
 <a href="http://www.accuweather.com/en/ie/dublin/207931/weather-forecast/207931" class="aw-widget-legal">
 <!--
 By accessing and/or using this code snippet, you agree to AccuWeather’s terms and conditions (in English) which can be found at http://www.accuweather.com/en/free-weather-widgets/terms and AccuWeather’s Privacy Statement (in English) which can be found at http://www.accuweather.com/en/privacy.
 -->
 </a><div id="awcc1427058850226" class="aw-widget-current"  data-locationkey="207931" data-unit="c" data-language="en-us" data-useip="false" data-uid="awcc1427058850226"></div><script type="text/javascript" src="http://oap.accuweather.com/launch.js"></script>
-</td>
-</tr>
 
-<th>Travel Departures</th>
-<tr>
-<td valign="top">
+
+<!-- <th>Travel Departures</th> -->
+
+<div align="center" class="rssTitle">Travel Departures</div>
 <div id="dynamic_train" class="infoSurroundTransport">Loading...</div>
 </td>
 </tr>
-
 </table>
 <a href="/settings">Settings</a>
 </div>
@@ -83,16 +75,12 @@ var travel_delay = 10000;
             setTimeout(calloutTrain, travel_delay);
         });
     };
-
 // initial call
 </script>
-
-
 
 <script>
 
 var rssDelay = 10000;
-
     calloutRss = function () {
         $.ajax({
             url: "/rss",
@@ -100,14 +88,11 @@ var rssDelay = 10000;
             cache: false
         })
         .done(function (response) {
-
-             $("#rss").parent().fadeOut(function() {
-                $("#rss").parent().replaceWith(function() {
+             $("#rss").fadeOut(function() {
+                $("#rss").replaceWith(function() {
                     return $(response).hide().fadeIn();
                 });
             });
-
-
             // $("#rss").parent().replaceWith(response);
         })
         .always(function () {
@@ -123,8 +108,8 @@ var rssDelay = 10000;
         })
         .done(function (response) {
             // $("#rss").parent().replaceWith(response);
-            $("#rss").parent().fadeOut(function() {
-                $("#rss").parent().replaceWith(function() {
+            $("#rss").fadeOut(function() {
+                $("#rss").replaceWith(function() {
                     return $(response).hide().fadeIn();
                 });
             });

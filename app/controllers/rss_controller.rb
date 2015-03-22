@@ -50,16 +50,16 @@ class RssController < ApplicationController
 				htmlresp = ""
 				open(rssUrl) do |rss|
 				  feed = RSS::Parser.parse(rss)
-				  htmlresp = "<tr><td id=\"rss\" width=\"60%\" valign=\"top\" rowspan=\"30\"><div align=\"center\" class=\"rssTitle\">Security News</div><div class=\"jimmy marquee\" id=\"rssdiv\"><span>"
+				  htmlresp = "<td id=\"rss\" width=\"60%\" valign=\"top\" rowspan=\"30\"><div align=\"center\" class=\"rssTitle\">Security News</div><div>"
 				  feed.items.each do |item|
-				    htmlresp = "#{htmlresp} <h3 class=\"rssHeader\">#{item.title}</h3> <div class=\"infoSurround\">#{item.description}</br></br></div>"
+				    htmlresp = "#{htmlresp} <h3 class=\"rssHeader\">#{item.title}</h3> <div class=\"infoSurround\">#{item.description} </br></br></div>"
 				  end
 				end
-				htmlresp = "#{htmlresp}</span></div></td></tr>"
+				htmlresp = "#{htmlresp}</div></td>"
 			rescue Exception => ee
-				htmlresp = "<tr><td id=\"rss\" width=\"60%\" valign=\"top\" rowspan=\"30\"><div align=\"center\" class=\"rssTitle\">Security News</div><div class=\"jimmy marquee\" id=\"rssdiv\"><span>"
+				htmlresp = "<td id=\"rss\" width=\"60%\" valign=\"top\" rowspan=\"30\"><div align=\"center\" class=\"rssTitle\">Security News</div><div class=\"jimmy marquee\" id=\"rssdiv\"><span>"
 				htmlresp = "#{htmlresp} No data found"
-				htmlresp = "#{htmlresp}</span></div></td></tr>"
+				htmlresp = "#{htmlresp}</span></div></td>"
 			end
 			DataCache.first
 			cache.rss = htmlresp
