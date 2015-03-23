@@ -64,7 +64,7 @@ class SettingsController < ApplicationController
 
   def listNotices
     require "json"
-    firstSetting = Setting.take
+    firstSetting = Setting.first
     notices = firstSetting.notices
 
     htmlresp = "<td id=\"rss\" width=\"60%\" valign=\"top\" rowspan=\"30\"><div align=\"center\" class=\"rssTitle\">This Weeks Site News</div>"
