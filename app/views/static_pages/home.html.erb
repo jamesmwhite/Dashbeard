@@ -37,19 +37,19 @@ By accessing and/or using this code snippet, you agree to AccuWeather’s terms 
 
 <script>
 callTrain = function(){
-    dynamic_change("/train","dynamic_train",5000,callBus);
+    dynamic_change("/train","dynamic_train",10000,callBus);
 };
 callBus = function(){
-    dynamic_change("/bus","dynamic_train",5000,callTrain);
+    dynamic_change("/bus","dynamic_train",10000,callTrain);
 };
 callStock = function(){
     dynamic_change("/stock","stock",60000,callStock);
 };
 callRss = function(){
-    dynamic_change("/rss","rss",5000,callNotices,true);
+    dynamic_change("/rss","rss",10000,callNotices,true);
 };
 callNotices = function(){
-    dynamic_change("/notices","rss",5000,callRss,true);
+    dynamic_change("/notices","rss",10000,callRss,true);
 };
 
 // initial order of elements on screen to load 
