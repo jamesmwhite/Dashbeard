@@ -85,3 +85,21 @@ dynamic_change = function (fetch_url,html_el,time_delay,next_func,replace) {
             setTimeout(next_func, time_delay);
         });
     };
+
+
+
+    checkRefresh = function () {
+        $.ajax({
+            url: "/checkRefresh",
+            dataType: "text",
+            cache: false
+        })
+        .done(function (response) {
+            if(response=="yes"){
+                window.location.reload(1);
+            }
+        })
+        .always(function () {
+            setTimeout(checkRefresh, 5000);
+        });
+    };

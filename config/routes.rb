@@ -11,6 +11,10 @@ Rails.application.routes.draw do
   get '/rss/', to: 'rss#feed'
   get '/notices/', to: 'settings#listNotices'
   get '/clearcache/', to: 'data_caches#clearAll'
+  get '/setMessage/', to: 'static_pages#setMessage'
+  get '/setImage/', to: 'static_pages#setImg'
+  get '/checkRefresh/', to: 'static_pages#checkRefresh'
+  
 
 
 
