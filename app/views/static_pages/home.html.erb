@@ -1,6 +1,9 @@
 <script type="text/javascript">document.write('\x3Cscript type="text/javascript" src="' + ('https:' == document.location.protocol ? 'https://' : 'http://') + 'feed.mikle.com/js/rssmikle.js">\x3C/script>');</script>
 <% bigMessage = getBigMessage() %>
 <% bigImage = getBigImage() %>
+<script>
+var currentMode = "<%= getCurrentMode() %>";
+</script>
 <% if defined? bigMessage and not bigMessage.blank? %>
 <center class="bigMessage"><%= bigMessage %></center>
 <% elsif defined? bigImage and not bigImage.blank? %>
@@ -74,5 +77,5 @@ $('h3').marquee({ speed: 5 });
 <div style="margin: 15px 0px 0px; display: inline-block; text-align: center; width: 100%;"><div style="display: inline-block; padding: 2px 4px; margin: 0px 0px 5px; border: 1px solid rgb(204, 204, 204); text-align: center; background-color: transparent;"><a href="http://localtimes.info/difference" style="text-decoration: none; font-size: 13px; color: rgb(252, 251, 251);">World Clock</a></div>
 <% end %>
 <script>
-// checkRefresh();
+checkRefresh();
 </script>

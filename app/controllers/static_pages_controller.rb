@@ -8,7 +8,11 @@ class StaticPagesController < ApplicationController
 
   def setMessage
     Rails.cache.write("bigMessage", params[:message])
-    Rails.cache.write("mode", "message")
+    if params[:message].blank?
+    	Rails.cache.write("mode", "")
+    else
+    	Rails.cache.write("mode", "message")
+    end
     respond_to do |format|
       format.html { redirect_to root_path }
     end
@@ -16,7 +20,11 @@ class StaticPagesController < ApplicationController
 
   def setImg
     Rails.cache.write("bigImage", params[:img])
-    Rails.cache.write("mode", "img")
+    if params[:img].blank?
+    	Rails.cache.write("mode", "")
+    else
+    	Rails.cache.write("mode", "img")
+    end
     respond_to do |format|
       format.html { redirect_to root_path }
     end
@@ -24,35 +32,6 @@ class StaticPagesController < ApplicationController
 
 
   def checkRefresh
-  	puts session[:mode]
-
-	if not defined? session[:mode] or session[:mode].blank?
-		if not Rails.cache.read("mode").blank?
-			puts "Refresh needed"
-			puts "Rails cache: #{Rails.cache.read("mode")}"
-			puts "Session mode: #{session[:mode]}"
-			render :text => "yes"	
-		else
-			puts "No Refresh needed"
-			puts "Rails cache: #{Rails.cache.read("mode")}"
-			puts "Session mode: #{session[:mode]}"
-			render :text => "no"
-		end
-		
-	else
-		if session[:mode] == Rails.cache.read("mode")
-			puts "No Refresh needed"
-			puts "Rails cache: #{Rails.cache.read("mode")}"
-			puts "Session mode: #{session[:mode]}"
-			render :text => "no"
-		else
-			puts "Refresh needed"
-			puts "Rails cache: #{Rails.cache.read("mode")}"
-			puts "Session mode: #{session[:mode]}"
-			render :text => "yes"
-		end
-
-	end
-
+  	render :text => Rails.cache.read("mode")
   end
 end

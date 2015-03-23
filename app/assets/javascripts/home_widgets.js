@@ -95,11 +95,14 @@ dynamic_change = function (fetch_url,html_el,time_delay,next_func,replace) {
             cache: false
         })
         .done(function (response) {
-            if(response=="yes"){
+            if(response != currentMode){
                 window.location.reload(1);
             }
+            console.log(response);
+            console.log(currentMode);
+
         })
         .always(function () {
-            setTimeout(checkRefresh, 5000);
+            setTimeout(checkRefresh, 30000);
         });
     };

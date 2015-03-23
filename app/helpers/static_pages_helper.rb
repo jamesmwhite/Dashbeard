@@ -34,4 +34,8 @@ module StaticPagesHelper
 			puts "No big message"
 		end
 	end
+
+	def getCurrentMode()
+		return Rails.cache.read("mode")
+	end
 end
