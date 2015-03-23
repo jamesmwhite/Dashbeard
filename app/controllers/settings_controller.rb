@@ -87,6 +87,6 @@ class SettingsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def setting_params
-      params.require(:setting).permit(:rssfeed, :stocksymbol, :weathercode, :trainstation, :busstopcode, :refreshtime, :notices)
+      params.require(:setting).permit(:rssfeed, :stocksymbol, :weathercode, :trainstation, :busstopcode, :refreshtime, :notices, :marquee)
     end
 end

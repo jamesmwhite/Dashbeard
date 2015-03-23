@@ -29,6 +29,10 @@
       <td><b>Notices:</b></td>
         <td colspan="5"><%= setting.notices %></td>
         </tr>
+        <tr>
+      <td><b>Marquee:</b></td>
+        <td colspan="5"><%= setting.marquee %></td>
+        </tr>
         <td><%= link_to 'Show', setting %>
         <%= link_to 'Edit', edit_setting_path(setting) %>
         <%= link_to 'Destroy', setting, method: :delete, data: { confirm: 'Are you sure?' } %></td>

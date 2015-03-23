@@ -1,12 +1,10 @@
 <script type="text/javascript">document.write('\x3Cscript type="text/javascript" src="' + ('https:' == document.location.protocol ? 'https://' : 'http://') + 'feed.mikle.com/js/rssmikle.js">\x3C/script>');</script>
-<%= javascript_include_tag "jClocksGMT"%>
-<%= javascript_include_tag "jquery.rotate"%>
-<!-- <h1>Info </h1> -->
 
 <center><script type="text/javascript" src="http://localtimes.info/world_clock2.php?&cp1_Hex=fcfbfb&cp2_Hex=FFFFFF&cp3_Hex=000000&fwdt=110&ham=1&hbg=1&hfg=0&sid=0&mon=0&wek=0&wkf=0&sep=0&widget_number=21000&lcid=SNXX0006,INXX0012,GMXX0025,EIXX0014,USVA0645,USCA0706"></script></div></center>
 <% if defined? notice and not notice.blank? %>
 <center><p id="notice"><%= notice %></p></center>
 <% end %>
+<h3 class="marqueeHeader">Hello</h3>
 
 <div>
 <table width="100%" cellpadding="0">
@@ -51,8 +49,6 @@ var travel_delay = 10000;
             $("#dynamic_train").fadeOut('slow',function(){
                 $("#dynamic_train").html(response);
             }).fadeIn('slow');
-
-
         })
         .always(function () {
             setTimeout(calloutBus, travel_delay);
@@ -138,15 +134,83 @@ var stock_delay = 60000,
 </script>
 
 <script>
-$("#clock_dc").jClocksGMT({offset: '-4', analog: true, digital: true, hour24: false});
-$("#clock_dub").jClocksGMT({offset: '0', analog: true, digital: true, hour24: false});
-$("#clock_cali").jClocksGMT({offset: '-8', analog: true, digital: true, hour24: false});
-$("#clock_bangelore").jClocksGMT({offset: '+5.5', analog: true, digital: true, hour24: false});
-$("#clock_dresden").jClocksGMT({offset: '1', analog: true, digital: true, hour24: false});
 
 // initial order of elements on screen to load 
 calloutTrain();
 calloutRss();
 calloutStock();
 </script>
+
+<script>
+    (function($) {
+        $.fn.textWidth = function(){
+             var calc = '<span style="display:none">' + $(this).text() + '</span>';
+             $('body').append(calc);
+             var width = $('body').find('span:last').width();
+             $('body').find('span:last').remove();
+            return width;
+        };
+        
+        $.fn.marquee = function(args) {
+            var that = $(this);
+            var textWidth = that.textWidth(),
+                offset = that.width(),
+                width = offset,
+                css = {
+                    'text-indent' : that.css('text-indent'),
+                    'overflow' : that.css('overflow'),
+                    'white-space' : that.css('white-space')
+                },
+                marqueeCss = {
+                    'text-indent' : width,
+                    'overflow' : 'hidden',
+                    'white-space' : 'nowrap'
+                },
+                args = $.extend(true, { count: -1, speed: 1e1, leftToRight: false }, args),
+                i = 0,
+                stop = textWidth*-1,
+                dfd = $.Deferred();
+            
+            function go() {
+                if(!that.length) return dfd.reject();
+                if(width == stop) {
+                    i++;
+                    if(i == args.count) {
+                        that.css(css);
+                        return dfd.resolve();
+                    }
+                    if(args.leftToRight) {
+                        width = textWidth*-1;
+                    } else {
+                        width = offset;
+                    }
+                }
+                that.css('text-indent', width + 'px');
+                if(args.leftToRight) {
+                    width++;
+                } else {
+                    width--;
+                }
+                setTimeout(go, args.speed);
+            };
+            if(args.leftToRight) {
+                width = textWidth*-1;
+                width++;
+                stop = offset;
+            } else {
+                width--;            
+            }
+            that.css(marqueeCss);
+            go();
+            return dfd.promise();
+        };
+    })(jQuery);
+
+$('h1').marquee();
+$('h2').marquee({ count: 2 });
+$('h3').marquee({ speed: 5 });
+$('h4').marquee({ leftToRight: true });
+$('h5').marquee({ count: 1, speed: 2 }).done(function() { $('h5').css('color', '#f00'); })
+</script
+
 <div style="margin: 15px 0px 0px; display: inline-block; text-align: center; width: 100%;"><div style="display: inline-block; padding: 2px 4px; margin: 0px 0px 5px; border: 1px solid rgb(204, 204, 204); text-align: center; background-color: transparent;"><a href="http://localtimes.info/difference" style="text-decoration: none; font-size: 13px; color: rgb(252, 251, 251);">World Clock</a></div>

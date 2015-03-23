@@ -37,7 +37,11 @@
   </div>
   <div class="field">
     <%= f.label :notices %><br>
-    <%= f.text_area :notices %>
+    <%= f.text_area :notices ,:cols => "30", :rows => "10" %>
+  </div>
+  <div class="field">
+    <%= f.label :marquee %><br>
+    <%= f.text_area :marquee ,:cols => "30", :rows => "10" %>
   </div>
   <div class="actions">
     <%= f.submit %>
