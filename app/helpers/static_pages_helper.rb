@@ -35,7 +35,7 @@ module StaticPagesHelper
 		end
 	end
 
-	def getCurrentMode()
-		return Rails.cache.read("mode")
+	def getRefreshDate()
+		return Rails.cache.read("refreshDate")
 	end
 end

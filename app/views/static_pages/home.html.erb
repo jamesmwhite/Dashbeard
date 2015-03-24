@@ -2,12 +2,23 @@
 <% bigMessage = getBigMessage() %>
 <% bigImage = getBigImage() %>
 <script>
-var currentMode = "<%= getCurrentMode() %>";
+var lastRefresh = "<%= getRefreshDate() %>";
 </script>
 <% if defined? bigMessage and not bigMessage.blank? %>
 <center class="bigMessage"><%= bigMessage %></center>
 <% elsif defined? bigImage and not bigImage.blank? %>
-<img src="<%=bigImage%>" width="100%">
+
+        <script type="text/javascript" charset="utf-8">
+            $(document).ready(function() {
+                $("img").photoResize({
+                    bottomSpacing: 15
+                });
+            });
+        </script>
+        <style type="text/css" media="screen">
+            body { text-align: center; }
+        </style>
+<img src="<%=bigImage%>" >
 <% else %>
 <script type="text/javascript">
 	var standardLoad = true;

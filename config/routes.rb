@@ -14,6 +14,8 @@ Rails.application.routes.draw do
   get '/setMessage/', to: 'static_pages#setMessage'
   get '/setImage/', to: 'static_pages#setImg'
   get '/checkRefresh/', to: 'static_pages#checkRefresh'
+  get '/forceRefresh/', to: 'static_pages#forceRefresh'
+  
   
 
 

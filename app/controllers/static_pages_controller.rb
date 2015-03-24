@@ -8,11 +8,8 @@ class StaticPagesController < ApplicationController
 
   def setMessage
     Rails.cache.write("bigMessage", params[:message])
-    if params[:message].blank?
-    	Rails.cache.write("mode", "")
-    else
-    	Rails.cache.write("mode", "message")
-    end
+    Rails.cache.write("bigImage", "")
+    Rails.cache.write("refreshDate", DateTime.now)
     respond_to do |format|
       format.html { redirect_to root_path }
     end
@@ -20,11 +17,8 @@ class StaticPagesController < ApplicationController
 
   def setImg
     Rails.cache.write("bigImage", params[:img])
-    if params[:img].blank?
-    	Rails.cache.write("mode", "")
-    else
-    	Rails.cache.write("mode", "img")
-    end
+    Rails.cache.write("bigMessage", "")
+    Rails.cache.write("refreshDate", DateTime.now)
     respond_to do |format|
       format.html { redirect_to root_path }
     end
@@ -32,6 +26,13 @@ class StaticPagesController < ApplicationController
 
 
   def checkRefresh
-  	render :text => Rails.cache.read("mode")
+  	render :text => Rails.cache.read("refreshDate")
+  end
+
+  def forceRefresh
+    Rails.cache.write("refreshDate", DateTime.now)
+    respond_to do |format|
+      format.html { redirect_to root_path }
+    end
   end
 end

@@ -95,14 +95,43 @@ dynamic_change = function (fetch_url,html_el,time_delay,next_func,replace) {
             cache: false
         })
         .done(function (response) {
-            if(response != currentMode){
+            if(response != lastRefresh){
                 window.location.reload(1);
             }
-            console.log(response);
-            console.log(currentMode);
 
         })
         .always(function () {
             setTimeout(checkRefresh, 30000);
         });
     };
+
+
+
+
+    (function ($) {
+
+    $.fn.photoResize = function (options) {
+        var element = $(this), 
+            defaults = {
+                bottomSpacing: 10
+            };
+        
+        $(element).load(function () {
+            updatePhotoHeight();
+
+            $(window).bind('resize', function () {
+                updatePhotoHeight();
+            });
+        });
+
+        options = $.extend(defaults, options);
+
+        function updatePhotoHeight() {
+            var o = options, 
+                photoHeight = $(window).height();
+
+            $(element).attr('height', photoHeight - o.bottomSpacing);
+        }
+    };
+
+}(jQuery));
