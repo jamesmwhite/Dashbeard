@@ -1,35 +1,54 @@
 <script type="text/javascript">document.write('\x3Cscript type="text/javascript" src="' + ('https:' == document.location.protocol ? 'https://' : 'http://') + 'feed.mikle.com/js/rssmikle.js">\x3C/script>');</script>
 <% bigMessage = getBigMessage() %>
 <% bigImage = getBigImage() %>
+
+<style type="text/css" media="screen">
+    body { text-align: center; }
+</style>
+
 <script>
+var bigMessage = "<%= getBigMessage() %>";
+var bigImage = "<%= getBigImage() %>";
+
 var lastRefresh = "<%= getRefreshDate() %>";
+checkRefresh();
+var iter = 0;
+
+swapContent = function(){
+	if(iter==1){
+		if(bigImage.length > 0 || bigMessage.length > 0){
+			$("#normalContent").fadeOut('slow');
+			$("#otherContent").fadeIn('slow');
+			iter = 0;	
+			$('#otherImage').height($(window).height());
+		}
+	}
+	else{
+		$("#otherContent").fadeOut('slow');
+		$("#normalContent").fadeIn('slow');
+		iter = 1;
+	}
+}
 </script>
+
+<div id="otherContent">
 <% if defined? bigMessage and not bigMessage.blank? %>
 <center class="bigMessage"><%= bigMessage %></center>
 <% elsif defined? bigImage and not bigImage.blank? %>
+<img id="otherImage" src="<%=bigImage%>" >
+<% end %>
+</div>
 
-        <script type="text/javascript" charset="utf-8">
-            $(document).ready(function() {
-                $("img").photoResize({
-                    bottomSpacing: 15
-                });
-            });
-        </script>
-        <style type="text/css" media="screen">
-            body { text-align: center; }
-        </style>
-<img src="<%=bigImage%>" >
-<% else %>
-<script type="text/javascript">
-	var standardLoad = true;
-</script>
-<center><script type="text/javascript" src="http://localtimes.info/world_clock2.php?&cp1_Hex=fcfbfb&cp2_Hex=FFFFFF&cp3_Hex=000000&fwdt=110&ham=1&hbg=1&hfg=0&sid=0&mon=0&wek=0&wkf=0&sep=0&widget_number=21000&lcid=SNXX0006,INXX0012,GMXX0025,EIXX0014,USVA0645,USCA0706"></script></div></center>
+<div id="normalContent">
+<center><script type="text/javascript" src="http://localtimes.info/world_clock2.php?&cp1_Hex=fcfbfb&cp2_Hex=FFFFFF&cp3_Hex=000000&fwdt=110&ham=1&hbg=1&hfg=0&sid=0&mon=0&wek=0&wkf=0&sep=0&widget_number=21000&lcid=SNXX0006,INXX0012,GMXX0025,EIXX0014,USVA0645,USCA0706"></script></center>
+
 <% if defined? notice and not notice.blank? %>
 <center><p id="notice"><%= notice %></p></center>
 <% end %>
+
 <h3 class="marqueeHeader"><%= getMarquee() %></h3>
 
-<div>
+<div> <!-- start of table div -->
 <table width="100%" cellpadding="0">
 
 <tr id="rss2">
@@ -38,17 +57,16 @@ var lastRefresh = "<%= getRefreshDate() %>";
 
 <div valign="top" id="stock" class="infoSurround">Loading...</div>
 
-<!-- <th>Weather</th> -->
 </br>
 <div align="center" class="rssTitle">Weather</div><
 <a href="http://www.accuweather.com/en/ie/dublin/207931/weather-forecast/207931" class="aw-widget-legal">
 <!--
 By accessing and/or using this code snippet, you agree to AccuWeather’s terms and conditions (in English) which can be found at http://www.accuweather.com/en/free-weather-widgets/terms and AccuWeather’s Privacy Statement (in English) which can be found at http://www.accuweather.com/en/privacy.
 -->
-</a><div id="awcc1427058850226" class="aw-widget-current"  data-locationkey="207931" data-unit="c" data-language="en-us" data-useip="false" data-uid="awcc1427058850226"></div><script type="text/javascript" src="http://oap.accuweather.com/launch.js"></script>
-
-
-<!-- <th>Travel Departures</th> -->
+</a>
+<div id="awcc1427058850226" class="aw-widget-current"  data-locationkey="207931" data-unit="c" data-language="en-us" data-useip="false" data-uid="awcc1427058850226">
+</div>
+<script type="text/javascript" src="http://oap.accuweather.com/launch.js"></script>
 
 <div align="center" class="rssTitle">Travel Departures</div>
 <div id="dynamic_train" class="infoSurroundTransport">Loading...</div>
@@ -56,7 +74,7 @@ By accessing and/or using this code snippet, you agree to AccuWeather’s terms 
 </tr>
 </table>
 <a href="/settings">Settings</a>
-</div>
+</div> <!-- end of table div -->
 
 <script>
 callTrain = function(){
@@ -85,8 +103,15 @@ callRss();
 $('h3').marquee({ speed: 5 });
 </script>
 
-<div style="margin: 15px 0px 0px; display: inline-block; text-align: center; width: 100%;"><div style="display: inline-block; padding: 2px 4px; margin: 0px 0px 5px; border: 1px solid rgb(204, 204, 204); text-align: center; background-color: transparent;"><a href="http://localtimes.info/difference" style="text-decoration: none; font-size: 13px; color: rgb(252, 251, 251);">World Clock</a></div>
-<% end %>
+<div style="margin: 15px 0px 0px; display: inline-block; text-align: center; width: 100%;">
+<div style="display: inline-block; padding: 2px 4px; margin: 0px 0px 5px; border: 1px solid rgb(204, 204, 204); text-align: center; background-color: transparent;">
+<a href="http://localtimes.info/difference" style="text-decoration: none; font-size: 13px; color: rgb(252, 251, 251);">World Clock</a>
+</div>
+</div>
+</div>
+
 <script>
-checkRefresh();
+$("#otherContent").fadeOut('fast');
+window.setInterval(swapContent, 60000);
 </script>
+
