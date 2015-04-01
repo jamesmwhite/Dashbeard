@@ -6,6 +6,21 @@
     body { text-align: center; }
 </style>
 
+<!-- IMPORT FONT FROM GOOGLE  -->
+<script type="text/javascript">
+    WebFontConfig = {
+        google: { families: [ 'Raleway:200,400:latin' ] }
+    };
+    (function() {
+        var wf = document.createElement('script');
+        wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
+        '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+        wf.type = 'text/javascript';
+        wf.async = 'true';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(wf, s);
+    })(); </script>
+
 <script>
 var bigMessage = "<%= getBigMessage() %>";
 var bigImage = "<%= getBigImage() %>";
@@ -32,6 +47,7 @@ swapContent = function(){
 </script>
 
 <div id="otherContent">
+  <div id="fe_image"></div>
 <% if defined? bigMessage and not bigMessage.blank? %>
 <center class="bigMessage"><%= bigMessage %></center>
 <% elsif defined? bigImage and not bigImage.blank? %>
@@ -40,7 +56,10 @@ swapContent = function(){
 </div>
 
 <div id="normalContent">
-<center><script type="text/javascript" src="http://localtimes.info/world_clock2.php?&cp1_Hex=fcfbfb&cp2_Hex=FFFFFF&cp3_Hex=000000&fwdt=110&ham=1&hbg=1&hfg=0&sid=0&mon=0&wek=0&wkf=0&sep=0&widget_number=21000&lcid=SNXX0006,INXX0012,GMXX0025,EIXX0014,USVA0645,USCA0706"></script></center>
+  <div id="header">
+    <div id="fe_image"><%= image_tag 'logo.png' %></div>
+    <div id="fe-clocks"><script type="text/javascript" src="http://localtimes.info/world_clock2.php?&cp1_Hex=fcfbfb&cp2_Hex=FFFFFF&cp3_Hex=000000&fwdt=110&ham=1&hbg=1&hfg=0&sid=0&mon=0&wek=0&wkf=0&sep=0&widget_number=21000&lcid=SNXX0006,INXX0012,GMXX0025,EIXX0014,USVA0645,USCA0706"></script></div>
+  </div>
 
 <% if defined? notice and not notice.blank? %>
 <center><p id="notice"><%= notice %></p></center>
@@ -48,32 +67,30 @@ swapContent = function(){
 
 <h3 class="marqueeHeader"><%= getMarquee() %></h3>
 
-<div> <!-- start of table div -->
-<table width="100%" cellpadding="0">
+<div id="wrap">
+    <div id="main">
+      <div id="rss">Loading...</div>
+    </div>
+    <div id="sidebar">
+          <div align="center" class="rssTitle">Stock</div>
+          <div valign="top" id="stock" class="infoSurround">Loading...</div>
 
-<tr id="rss2">
-<td valign="top" rowspan="10" id="rss">Loading...</td>
-<td valign="top"><div align="center" class="rssTitle">Stock</div>
-
-<div valign="top" id="stock" class="infoSurround">Loading...</div>
-
-</br>
-<div align="center" class="rssTitle">Weather</div><
-<a href="http://www.accuweather.com/en/ie/dublin/207931/weather-forecast/207931" class="aw-widget-legal">
-<!--
-By accessing and/or using this code snippet, you agree to AccuWeather’s terms and conditions (in English) which can be found at http://www.accuweather.com/en/free-weather-widgets/terms and AccuWeather’s Privacy Statement (in English) which can be found at http://www.accuweather.com/en/privacy.
--->
-</a>
-<div id="awcc1427058850226" class="aw-widget-current"  data-locationkey="207931" data-unit="c" data-language="en-us" data-useip="false" data-uid="awcc1427058850226">
-</div>
+        <div align="center" class="rssTitle">Weather</div>
+      <!--
+      By accessing and/or using this code snippet, you agree to AccuWeather’s terms and conditions (in English) which can be found at http://www.accuweather.com/en/free-weather-widgets/terms and AccuWeather’s Privacy Statement (in English) which can be found at http://www.accuweather.com/en/privacy.
+      -->
+      <div id="weather-widget">
+        <div id="awcc1427058850226" class="aw-widget-current"  data-locationkey="207931" data-unit="c" data-language="en-us" data-useip="false" data-uid="awcc1427058850226">
+            <a href="http://www.accuweather.com/en/ie/dublin/207931/weather-forecast/207931" class="aw-widget-legal"></a>
+        </div>
+      </div>
 <script type="text/javascript" src="http://oap.accuweather.com/launch.js"></script>
 
-<div align="center" class="rssTitle">Travel Departures</div>
+<div align="center" class="rssTitle">Travel Information</div>
 <div id="dynamic_train" class="infoSurroundTransport">Loading...</div>
-</td>
-</tr>
-</table>
-<a href="/settings">Settings</a>
+    </div>
+</div>
+    <div id="settings"><a href="/settings">Settings</a></div>
 </div> <!-- end of table div -->
 
 <script>
@@ -100,7 +117,7 @@ callRss();
 </script>
 
 <script>
-$('h3').marquee({ speed: 5 });
+$('h3').marquee({ speed: 50 });
 </script>
 
 <div style="margin: 15px 0px 0px; display: inline-block; text-align: center; width: 100%;">

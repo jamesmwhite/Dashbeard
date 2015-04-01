@@ -56,11 +56,15 @@ class BusController < ApplicationController
 				parsed = JSON.parse(response.body)
 
 				actuals = parsed["actual"]
-				htmlresp = "<h2>Busaras Departures</h2><table><tr class=\"busheader\"><td>Destination</td><td>Planned Time</td><td>Actual Dept Time</td></tr>"
+				htmlresp = "<h2>Busaras Departures</h2>"
+        htmlresp = "#{htmlresp}<h3 id=\"bus-time-line\"><span id=\"bus-departing\">Destination</span><span id=\"bus-planned\">Planned Time</span><span>Actual Time</span></h3>"
 				for item in actuals
-					htmlresp = "#{htmlresp} <tr><td  class=\"busText\">#{item["direction"]}</td><td class=\"busText\" align=\"center\">#{item["plannedTime"]}</td><td align=\"center\"><font class=\"livetime\">#{item["actualTime"]}</font></td></tr>"
+          actualItem = "<span>&nbsp</span>"
+          unless item["actualTime"].nil?
+            actualItem = "<span class=\"livetime\">#{item["actualTime"]}</span>"
+          end
+					htmlresp = "#{htmlresp} <div id=\"bus-time-line\"><span id=\"bus-departing\">#{item["direction"]}</span><span id=\"bus-planned\">#{item["plannedTime"]}</span>#{actualItem}</div>"
 				end
-				htmlresp = "#{htmlresp} </table>"
 
 			rescue Exception => e
 				puts e

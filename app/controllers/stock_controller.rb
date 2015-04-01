@@ -122,11 +122,12 @@ class StockController < ApplicationController
 				puts ee.backtrace.join("\n")
 			end
 
-			htmlresp = "<div class=\"stock\"> #{stockSymbol.upcase} #{curprice} #{change} 
-			</br>#{stockSymbol2.upcase} #{curprice2} #{change2} 
-			</br>#{stockSymbol3.upcase} #{curprice3} #{change3} 
-			</br>#{stockSymbol4.upcase} #{curprice4} #{change4} 
-			</div></br>"
+			htmlresp = "<div id=\"stock\">
+      <div id=\"stock-line\"><span id=\"stock-symbol\">#{stockSymbol.upcase}</span> <span id=\"stock-price\">#{curprice}</span> <span id=\"stock-change\">#{change}</span></div>
+			<div id=\"stock-line\"><span id=\"stock-symbol\">#{stockSymbol2.upcase}</span> <span id=\"stock-price\">#{curprice2}</span> <span id=\"stock-change\">#{change2}</span></div>
+			<div id=\"stock-line\"><span id=\"stock-symbol\">#{stockSymbol3.upcase}</span> <span id=\"stock-price\">#{curprice3}</span> <span id=\"stock-change\">#{change3}</span></div>
+			<div id=\"stock-line\"><span id=\"stock-symbol\">#{stockSymbol4.upcase}</span> <span id=\"stock-price\">#{curprice4}</span> <span id=\"stock-change\">#{change4} </span></div>
+			</div>"
 			DataCache.first
 			cache.stock = htmlresp
 			cache.stockDate = DateTime.now

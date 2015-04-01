@@ -50,9 +50,9 @@ class RssController < ApplicationController
 				htmlresp = ""
 				open(rssUrl) do |rss|
 				  feed = RSS::Parser.parse(rss)
-				  htmlresp = "<td id=\"rss\" width=\"60%\" valign=\"top\" rowspan=\"30\"><div align=\"center\" class=\"rssTitle\">Security News</div><div>"
+				  htmlresp = "<div id=\"rss\" ><div align=\"center\" class=\"rssTitle\">Security News</div><div>"
 				  feed.items.each do |item|
-				    htmlresp = "#{htmlresp} <h3 class=\"rssHeader\">#{item.title}</h3> <div class=\"infoSurround\">#{item.description} </br></br></div>"
+				    htmlresp = "#{htmlresp} <h3 class=\"rssHeader\">#{item.title}</h3> <div class=\"infoSurround\">#{item.description}</div>"
 				  end
 				end
 				htmlresp = "#{htmlresp}</div></td>"
