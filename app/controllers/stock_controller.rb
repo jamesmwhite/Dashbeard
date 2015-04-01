@@ -77,7 +77,7 @@ class StockController < ApplicationController
 						end
 						htmlresp = "#{htmlresp} <div id=\"stock-line\"><span id=\"stock-symbol\">#{cursymbol.upcase}</span> <span id=\"stock-price\">#{curprice}</span> <span id=\"stock-change\">#{change}</span></div>"
 					end
-					htmlresp = "#{htmlresp}</div>
+					htmlresp = "#{htmlresp}</div>"
 				else
 					cursymbol = parsed["query"]["results"]["quote"]["symbol"]
 					curprice = parsed["query"]["results"]["quote"]["LastTradePriceOnly"]
