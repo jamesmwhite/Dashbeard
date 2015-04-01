@@ -113,7 +113,10 @@ dynamic_change = function (fetch_url,html_el,time_delay,next_func,replace) {
         else{
             curNum = 0;
         }
-        document.getElementById("otherImage").src=images[curNum];
+        if(images.length>0){
+            document.getElementById("otherImage").src=images[curNum];    
+        }
+        
         setTimeout(changeImage, 5000);
     }
 

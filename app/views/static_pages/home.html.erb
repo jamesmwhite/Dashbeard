@@ -1,6 +1,4 @@
 <script type="text/javascript">document.write('\x3Cscript type="text/javascript" src="' + ('https:' == document.location.protocol ? 'https://' : 'http://') + 'feed.mikle.com/js/rssmikle.js">\x3C/script>');</script>
-<% bigMessage = getBigMessage() %>
-<% bigImage = getBigImage() %>
 
 <style type="text/css" media="screen">
     body { text-align: center; }
@@ -25,9 +23,6 @@
 var curNum = 0;
 var images = [];
 loadImageRotation();
-
-var bigMessage = "<%= getBigMessage() %>";
-var bigImage = "<%= getBigImage() %>";
 
 var lastRefresh = "<%= getRefreshDate() %>";
 checkRefresh();
@@ -54,8 +49,8 @@ swapContent = function(){
 
 <div id="otherContent">
   <div id="fe_image"></div>
-<center class="bigMessage"><%= bigMessage %></center>
-<img id="otherImage" src="<%=bigImage%>" >
+
+<img id="otherImage" src="" >
 </div>
 
 <div id="normalContent">
