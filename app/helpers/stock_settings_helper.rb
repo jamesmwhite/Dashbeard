@@ -1,0 +1,2 @@
+module StockSettingsHelper
+end

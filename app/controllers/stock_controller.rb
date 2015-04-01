@@ -31,107 +31,76 @@ class StockController < ApplicationController
 	  	end
 
 	  	if goLive
-			stockSymbol = "feye" # default stock symbol
-			stockSymbol2 = "panw"
-			stockSymbol3 = "symc"
-			stockSymbol4 = "intc"
-			# Pulling stock symbol from settings
+	  		allSymbols = ""
+	  		numStocks = 0
+	  		begin
+	  			stocks = StockSetting.all.limit(5)
+		  		for stock in stocks
+		  			if allSymbols.blank?
+		  				allSymbols = stock.symbol
+		  			else
+		  				allSymbols = "#{allSymbols},#{stock.symbol}"
+		  			end
+		  			numStocks = numStocks + 1
+		  			
+		  		end
+	  		rescue Exception => e
+	  			puts "Problem getting stocks from db"
+	  		end
+	  		
+	  		
+	  		if allSymbols.blank?
+	  			allSymbols = "feye"
+	  			numStocks = 1
+	  		end
+			url = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.quote%20where%20symbol%20in%20(%22#{allSymbols}%22)&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback="
+
 			begin
-				setting = Setting.first
-				if not setting.blank? and defined? setting.stocksymbol
-					if not setting.stocksymbol.blank?
-						stockSymbol = setting.stocksymbol
-					end
-				end
-			rescue Exception => eee
-				puts eee.backtrace.join("\n")
-			end
-			#hardcoding second symbol now until I update settings to cater for more than one symbol
-			
-			url = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.quote%20where%20symbol%20in%20(%22#{stockSymbol}%22)&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback="
-			url2 = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.quote%20where%20symbol%20in%20(%22#{stockSymbol2}%22)&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback="
-			url3 = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.quote%20where%20symbol%20in%20(%22#{stockSymbol3}%22)&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback="
-			url4 = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.quote%20where%20symbol%20in%20(%22#{stockSymbol4}%22)&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback="
-			begin
-				result = Net::HTTP.get(URI.parse(url))
-
-				result2 = Net::HTTP.get(URI.parse(url2))	
-
-				result3 = Net::HTTP.get(URI.parse(url3))	
-
-				result4 = Net::HTTP.get(URI.parse(url4))	
-				# puts result
+				response = Net::HTTP.get(URI.parse(url))
 			rescue Exception => e
 				puts e.backtrace.join("\n")
 			end
 
 			begin
-				parsed = JSON.parse(result)
-				curprice = parsed["query"]["results"]["quote"]["LastTradePriceOnly"]
-				change = parsed["query"]["results"]["quote"]["Change"]
-				# puts change
-				if change.include? "-"
-					change = "<font class=\"stockred\">(#{change})</font>"
+				parsed = JSON.parse(response)
+				htmlresp = "<div class=\"stock\">"
+				if numStocks > 1
+					results = parsed["query"]["results"]["quote"]
+					for result in results
+						cursymbol = result["symbol"]
+						curprice = result["LastTradePriceOnly"]
+						change = result["Change"]	
+						if change.include? "-"
+							change = "<font class=\"stockred\">(#{change})</font>"
+						else
+							change = "<font class=\"stockgreen\">(#{change})</font>"
+						end
+						htmlresp = "#{htmlresp} #{cursymbol.upcase} #{curprice} #{change}</br>"
+					end
 				else
-					change = "<font class=\"stockgreen\">(#{change})</font>"
+					cursymbol = parsed["query"]["results"]["quote"]["symbol"]
+					curprice = parsed["query"]["results"]["quote"]["LastTradePriceOnly"]
+					change = parsed["query"]["results"]["quote"]["LastTradePriceOnly"]
+					if change.include? "-"
+						change = "<font class=\"stockred\">(#{change})</font>"
+					else
+						change = "<font class=\"stockgreen\">(#{change})</font>"
+					end
+					htmlresp = "#{htmlresp} #{cursymbol.upcase} #{curprice} #{change}</br>"
 				end
-				# htmlresp = "<div class=\"stock\"> FEYE #{curprice} #{change}</div></br>"
+				htmlresp = "#{htmlresp} </div></br>"
+
+				DataCache.first
+				cache.stock = htmlresp
+				cache.stockDate = DateTime.now
+				cache.save
+				puts "[Stock Data Cached]"
 			rescue Exception => ee
 				puts ee.backtrace.join("\n")
 			end
 
-			begin
-				parsed2 = JSON.parse(result2)
-				curprice2 = parsed2["query"]["results"]["quote"]["LastTradePriceOnly"]
-				change2 = parsed2["query"]["results"]["quote"]["Change"]
-				# puts change
-				if change2.include? "-"
-					change2 = "<font class=\"stockred\">(#{change2})</font>"
-				else
-					change2 = "<font class=\"stockgreen\">(#{change2})</font>"
-				end
-			rescue Exception => ee
-				puts ee.backtrace.join("\n")
-			end
-
-			begin
-				parsed3 = JSON.parse(result3)
-				curprice3 = parsed3["query"]["results"]["quote"]["LastTradePriceOnly"]
-				change3 = parsed3["query"]["results"]["quote"]["Change"]
-				# puts change
-				if change3.include? "-"
-					change3 = "<font class=\"stockred\">(#{change3})</font>"
-				else
-					change3 = "<font class=\"stockgreen\">(#{change3})</font>"
-				end
-			rescue Exception => ee
-				puts ee.backtrace.join("\n")
-			end
-
-			begin
-				parsed4 = JSON.parse(result4)
-				curprice4 = parsed4["query"]["results"]["quote"]["LastTradePriceOnly"]
-				change4 = parsed4["query"]["results"]["quote"]["Change"]
-				# puts change
-				if change4.include? "-"
-					change4 = "<font class=\"stockred\">(#{change4})</font>"
-				else
-					change4 = "<font class=\"stockgreen\">(#{change4})</font>"
-				end
-			rescue Exception => ee
-				puts ee.backtrace.join("\n")
-			end
-
-			htmlresp = "<div class=\"stock\"> #{stockSymbol.upcase} #{curprice} #{change} 
-			</br>#{stockSymbol2.upcase} #{curprice2} #{change2} 
-			</br>#{stockSymbol3.upcase} #{curprice3} #{change3} 
-			</br>#{stockSymbol4.upcase} #{curprice4} #{change4} 
-			</div></br>"
-			DataCache.first
-			cache.stock = htmlresp
-			cache.stockDate = DateTime.now
-			cache.save
-			puts "[Stock Data Cached]"
+		
+			
 		end
 			
 	 	render :text => htmlresp

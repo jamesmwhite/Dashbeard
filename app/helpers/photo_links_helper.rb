@@ -1,0 +1,2 @@
+module PhotoLinksHelper
+end

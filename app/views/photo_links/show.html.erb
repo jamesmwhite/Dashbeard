@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Url:</strong>
+  <%= @photo_link.url %>
+</p>
+
+<p>
+  <strong>Hidden:</strong>
+  <%= @photo_link.hidden %>
+</p>
+
+<%= link_to 'Edit', edit_photo_link_path(@photo_link) %> |
+<%= link_to 'Back', photo_links_path %>

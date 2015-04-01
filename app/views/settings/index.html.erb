@@ -35,7 +35,7 @@
         </tr>
         <td><%= link_to 'Show', setting %>
         <%= link_to 'Edit', edit_setting_path(setting) %>
-        <%= link_to 'Destroy', setting, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <%= button_to 'Delete', setting, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
       <tr>
       <td colspan="6"><hr></td>

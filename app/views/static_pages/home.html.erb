@@ -7,6 +7,10 @@
 </style>
 
 <script>
+var curNum = 0;
+var images = [];
+loadImageRotation();
+
 var bigMessage = "<%= getBigMessage() %>";
 var bigImage = "<%= getBigImage() %>";
 
@@ -16,7 +20,8 @@ var iter = 0;
 
 swapContent = function(){
 	if(iter==1){
-		if(bigImage.length > 0 || bigMessage.length > 0){
+		// if(bigImage.length > 0 || bigMessage.length > 0){
+		if(images.length > 0){
 			$("#normalContent").fadeOut('slow');
 			$("#otherContent").fadeIn('slow');
 			iter = 0;	
@@ -32,11 +37,11 @@ swapContent = function(){
 </script>
 
 <div id="otherContent">
-<% if defined? bigMessage and not bigMessage.blank? %>
+
 <center class="bigMessage"><%= bigMessage %></center>
-<% elsif defined? bigImage and not bigImage.blank? %>
+
 <img id="otherImage" src="<%=bigImage%>" >
-<% end %>
+
 </div>
 
 <div id="normalContent">
@@ -74,6 +79,8 @@ By accessing and/or using this code snippet, you agree to AccuWeather’s terms 
 </tr>
 </table>
 <a href="/settings">Settings</a>
+<a href="/photo_links">Photos</a>
+<a href="/stock_settings">Stocks</a>
 </div> <!-- end of table div -->
 
 <script>

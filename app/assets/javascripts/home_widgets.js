@@ -104,3 +104,35 @@ dynamic_change = function (fetch_url,html_el,time_delay,next_func,replace) {
             setTimeout(checkRefresh, 30000);
         });
     };
+
+    changeImage = function(){
+        curNum = curNum + 1;
+        if(curNum < images.length){
+            
+        }
+        else{
+            curNum = 0;
+        }
+        document.getElementById("otherImage").src=images[curNum];
+        setTimeout(changeImage, 5000);
+    }
+
+
+    loadImageRotation = function() {
+      $.ajax({
+            url: "/getImages",
+            dataType: "text",
+            cache: false
+        })
+        .done(function (response) {
+            var photos = JSON.parse(response);
+            for(var i in photos)
+            {
+                images[i] = photos[i].url;
+            }
+            
+        })
+        .always(function () {
+            changeImage();
+        });  
+    }

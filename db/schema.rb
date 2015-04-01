@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150323172322) do
+ActiveRecord::Schema.define(version: 20150401111045) do
 
   create_table "data_caches", force: :cascade do |t|
     t.string   "stock"
@@ -26,6 +26,13 @@ ActiveRecord::Schema.define(version: 20150323172322) do
     t.datetime "busDate"
   end
 
+  create_table "photo_links", force: :cascade do |t|
+    t.string   "url"
+    t.boolean  "hidden"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "settings", force: :cascade do |t|
     t.string   "rssfeed"
     t.string   "stocksymbol"
@@ -37,6 +44,12 @@ ActiveRecord::Schema.define(version: 20150323172322) do
     t.datetime "updated_at",   null: false
     t.text     "notices"
     t.string   "marquee"
+  end
+
+  create_table "stock_settings", force: :cascade do |t|
+    t.string   "symbol"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end

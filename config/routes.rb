@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  resources :stock_settings
+
+  resources :photo_links
+
   resources :data_caches
 
   resources :settings
@@ -15,9 +19,7 @@ Rails.application.routes.draw do
   get '/setImage/', to: 'static_pages#setImg'
   get '/checkRefresh/', to: 'static_pages#checkRefresh'
   get '/forceRefresh/', to: 'static_pages#forceRefresh'
-  
-  
-
+  get '/getImages/', to: 'photo_links#getImages'
 
 
   # The priority is based upon order of creation: first created -> highest priority.

@@ -38,4 +38,5 @@ module StaticPagesHelper
 	def getRefreshDate()
 		return Rails.cache.read("refreshDate")
 	end
+
 end
