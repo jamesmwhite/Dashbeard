@@ -63,7 +63,7 @@ class StockController < ApplicationController
 
 			begin
 				parsed = JSON.parse(response)
-				htmlresp = "<div class=\"stock\">"
+				htmlresp = "<div id=\"stock\">"
 				if numStocks > 1
 					results = parsed["query"]["results"]["quote"]
 					for result in results
@@ -75,8 +75,9 @@ class StockController < ApplicationController
 						else
 							change = "<font class=\"stockgreen\">(#{change})</font>"
 						end
-						htmlresp = "#{htmlresp} #{cursymbol.upcase} #{curprice} #{change}</br>"
+						htmlresp = "#{htmlresp} <div id=\"stock-line\"><span id=\"stock-symbol\">#{cursymbol.upcase}</span> <span id=\"stock-price\">#{curprice}</span> <span id=\"stock-change\">#{change}</span></div>"
 					end
+					htmlresp = "#{htmlresp}</div>
 				else
 					cursymbol = parsed["query"]["results"]["quote"]["symbol"]
 					curprice = parsed["query"]["results"]["quote"]["LastTradePriceOnly"]

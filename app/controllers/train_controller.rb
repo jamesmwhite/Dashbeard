@@ -74,7 +74,7 @@ class TrainController < ApplicationController
 						stationDeptTime = stationDeptTime.sub(/.+?time">/m, '')
 						journeyWithoutTime = singletrain.sub(/[0-9][0-9]:[0-9][0-9] - /, '')
 						stationDeptTime = stationDeptTime.sub(/<\/td>.+/m, '') #this is the departure time of the train from tara street
-						trainsArr.push "Departing: <font class=\"livetime\">#{stationDeptTime}</font> - #{journeyWithoutTime}</br><br>"
+						trainsArr.push "<div id=\"train-time-line\"><div id=\"train-departing\">Departing: <span class=\"livetime\">#{stationDeptTime}</span></div><div id=\"journey-time\">#{journeyWithoutTime}</div></div>"
 						# responseres = "#{responseres} #{singletrain} departing at <font class=\"livetime\">#{stationDeptTime}</font></br><br>" 
 						count = count + 1
 					end
