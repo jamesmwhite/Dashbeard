@@ -75,7 +75,7 @@ class StockController < ApplicationController
 						else
 							change = "<font class=\"stockgreen\">(#{change})</font>"
 						end
-						htmlresp = "#{htmlresp} <div id=\"stock-line\"><span id=\"stock-symbol\">#{cursymbol.upcase}</span> <span id=\"stock-price\">#{curprice}</span> <span id=\"stock-change\">#{change}</span></div>"
+						htmlresp = "#{htmlresp} <div class=\"stock-line\"><span class=\"stock-symbol\">#{cursymbol.upcase}</span> <span class=\"stock-price\">#{curprice}</span> <span class=\"stock-change\">#{change}</span></div>"
 					end
 					htmlresp = "#{htmlresp}</div>"
 				else
@@ -87,9 +87,9 @@ class StockController < ApplicationController
 					else
 						change = "<font class=\"stockgreen\">(#{change})</font>"
 					end
-					htmlresp = "#{htmlresp} #{cursymbol.upcase} #{curprice} #{change}</br>"
+					htmlresp = "#{htmlresp} <div class=\"stock-line\"><span class=\"stock-symbol\">#{cursymbol.upcase}</span> <span class=\"stock-price\">#{curprice}</span> <span class=\"stock-change\">#{change}</span></div>"
 				end
-				htmlresp = "#{htmlresp} </div></br>"
+				htmlresp = "#{htmlresp} </div>"
 
 				DataCache.first
 				cache.stock = htmlresp

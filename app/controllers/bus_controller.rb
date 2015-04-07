@@ -57,13 +57,13 @@ class BusController < ApplicationController
 
 				actuals = parsed["actual"]
 				htmlresp = "<h2>Busaras Departures</h2>"
-        htmlresp = "#{htmlresp}<h3 id=\"bus-time-line\"><span id=\"bus-departing\">Destination</span><span id=\"bus-planned\">Planned Time</span><span>Actual Time</span></h3>"
+        htmlresp = "#{htmlresp}<h3 class=\"bus-time-line\"><span class=\"bus-departing\">Destination</span><span class=\"bus-planned\">Planned Time</span><span>Actual Time</span></h3>"
 				for item in actuals
           actualItem = "<span>&nbsp</span>"
           unless item["actualTime"].nil?
             actualItem = "<span class=\"livetime\">#{item["actualTime"]}</span>"
           end
-					htmlresp = "#{htmlresp} <div id=\"bus-time-line\"><span id=\"bus-departing\">#{item["direction"]}</span><span id=\"bus-planned\">#{item["plannedTime"]}</span>#{actualItem}</div>"
+					htmlresp = "#{htmlresp} <div class=\"bus-time-line\"><span class=\"bus-departing\">#{item["direction"]}</span><span class=\"bus-planned\">#{item["plannedTime"]}</span>#{actualItem}</div>"
 				end
 
 			rescue Exception => e
