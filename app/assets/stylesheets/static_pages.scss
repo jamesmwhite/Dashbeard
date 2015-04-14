@@ -86,6 +86,7 @@
   background: none;
 }
 
+
 .rssTitle{
     border-top: 3px solid #3AAEDA;
     border-left: 3px solid #3AAEDA;
@@ -111,6 +112,17 @@
     font-size: 20px;
     padding: 10px;
     margin: 5px 20px 0 20px;
+}
+
+
+.noticeItem {
+  border-top: 2px solid #3AAEDA;
+  border-right: 2px solid #3AAEDA;
+  color: #ffffff;
+  font-size: 20px;
+  padding: 10px;
+  margin: 5px 20px 20px 20px;
+  width: 95%;
 }
 
 .marqueeHeader{
@@ -292,20 +304,6 @@
     color: white;
     text-align:center;
 }
-
-.noticeContainer {
-    background-color: #D8D8D8;
-    opacity: 0.6;
-    color: black;
-}
-
-.noticeItem {
-background-color: #D8D8D8;
-    color: black;
-    margin: 0px;
-    padding: 10px;
-}
-
 
 td {
   vertical-align: baseline;
