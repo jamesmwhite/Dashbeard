@@ -117,7 +117,7 @@ dynamic_change = function (fetch_url,html_el,time_delay,next_func,replace) {
             document.getElementById("otherImage").src=images[curNum];    
         }
         
-        setTimeout(changeImage, 5000);
+        setTimeout(changeImage, 10000);
     }
 
 

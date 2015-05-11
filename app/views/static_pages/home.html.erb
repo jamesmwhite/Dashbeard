@@ -102,10 +102,10 @@ callStock = function(){
     dynamic_change("/stock","stock",60000,callStock);
 };
 callRss = function(){
-    dynamic_change("/rss","rss",10000,callNotices,true);
+    dynamic_change("/rss","rss",20000,callNotices,true);
 };
 callNotices = function(){
-    dynamic_change("/notices","rss",10000,callRss,true);
+    dynamic_change("/notices","rss",20000,callRss,true);
 };
 
 // initial order of elements on screen to load 
