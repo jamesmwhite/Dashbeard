@@ -20,6 +20,8 @@ Rails.application.routes.draw do
   get '/checkRefresh/', to: 'static_pages#checkRefresh'
   get '/forceRefresh/', to: 'static_pages#forceRefresh'
   get '/getImages/', to: 'photo_links#getImages'
+  get '/getPhotoRefresh/', to: 'settings#getPhotoRefresh'
+  get '/getContentRefreshTime/', to: 'settings#getContentRefreshTime'
 
 
   # The priority is based upon order of creation: first created -> highest priority.

@@ -105,6 +105,7 @@ dynamic_change = function (fetch_url,html_el,time_delay,next_func,replace) {
         });
     };
 
+
     changeImage = function(){
         curNum = curNum + 1;
         if(curNum < images.length){
@@ -114,15 +115,36 @@ dynamic_change = function (fetch_url,html_el,time_delay,next_func,replace) {
             curNum = 0;
         }
         if(images.length>0){
-            document.getElementById("otherImage").src=images[curNum];    
+            document.getElementById("otherImage").src=images[curNum];
         }
         
-        setTimeout(changeImage, 10000);
+        setTimeout(changeImage, phototime);
     }
 
 
     loadImageRotation = function() {
-      $.ajax({
+
+        $.ajax({
+            url: "/getPhotoRefresh",
+            dataType: "text",
+            cache: false
+        })
+        .done(function (response) {
+            phototime = JSON.parse(response);
+        })
+        .error(function (err){
+            console.log(err);
+        })
+        .always(function () {
+
+            loadImageRotationFollowOn();
+
+        });      
+      
+    }
+
+    loadImageRotationFollowOn = function(){
+        $.ajax({
             url: "/getImages",
             dataType: "text",
             cache: false
@@ -138,4 +160,33 @@ dynamic_change = function (fetch_url,html_el,time_delay,next_func,replace) {
         .always(function () {
             changeImage();
         });  
+    }
+
+    organiseSwapping = function(){
+        try{
+            $.ajax({
+            url: "/getContentRefreshTime",
+            dataType: "text",
+            cache: false
+        })
+        .done(function (response) {
+            parsedVal = JSON.parse(response);
+            console.log(parsedVal);
+            // if(parsedVal != null && parsedVal > 0){
+                swaptime = parsedVal;
+            // }
+            $("#otherContent").fadeOut('fast');
+            window.setInterval(swapContent, swaptime);
+        })
+        .always(function () {
+            setTimeout(organiseSwapping, 60000);
+        });    
+        }
+        catch(error){
+            console.log(error);
+        }
+        
+
+
+        
     }

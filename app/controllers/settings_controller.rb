@@ -78,6 +78,22 @@ class SettingsController < ApplicationController
     render :json => htmlresp
   end
 
+  def getPhotoRefresh
+    require "json"
+    firstSetting = Setting.first
+    photoRefresh = firstSetting.photoRefresh
+    render :json => photoRefresh || 10001
+  end
+
+  def getContentRefreshTime
+    require "json"
+    firstSetting = Setting.first
+    refreshtime = firstSetting.refreshtime
+    render :json => refreshtime || 60001
+  end
+
+
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_setting
@@ -86,6 +102,6 @@ class SettingsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def setting_params
-      params.require(:setting).permit(:rssfeed, :stocksymbol, :weathercode, :trainstation, :busstopcode, :refreshtime, :notices, :marquee)
+      params.require(:setting).permit(:rssfeed, :stocksymbol, :weathercode, :trainstation, :busstopcode, :refreshtime, :notices, :marquee,:photoRefresh)
     end
 end

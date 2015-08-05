@@ -22,6 +22,8 @@
 <script>
 var curNum = 0;
 var images = [];
+var swaptime = 10000;
+var phototime = 10000;
 loadImageRotation();
 
 var lastRefresh = "<%= getRefreshDate() %>";
@@ -126,7 +128,6 @@ $('h3').marquee({ speed: 50 });
 </div>
 
 <script>
-$("#otherContent").fadeOut('fast');
-window.setInterval(swapContent, 60000);
+organiseSwapping();
 </script>
 
