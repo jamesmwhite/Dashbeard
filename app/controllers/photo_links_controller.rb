@@ -7,7 +7,7 @@ class PhotoLinksController < ApplicationController
   # GET /photo_links
   # GET /photo_links.json
   def index
-    @photo_links = PhotoLink.all
+    @photo_links = PhotoLink.order("created_at DESC")
   end
 
   # GET /photo_links/1

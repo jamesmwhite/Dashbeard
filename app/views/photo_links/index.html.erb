@@ -13,6 +13,8 @@
   </thead>
 
   <tbody>
+  <%= link_to 'New Photo link', new_photo_link_path %>
+  <br/>
     <% @photo_links.each do |photo_link| %>
       <tr>
         <td><img src="<%= photo_link.url %>" width="100"></td>
@@ -25,7 +27,3 @@
     <% end %>
   </tbody>
 </table>
-
-<br>
-
-<%= link_to 'New Photo link', new_photo_link_path %>
