@@ -179,7 +179,7 @@ dynamic_change = function (fetch_url,html_el,time_delay,next_func,replace) {
             window.setInterval(swapContent, swaptime);
         })
         .always(function () {
-            setTimeout(organiseSwapping, 60000);
+            // setTimeout(organiseSwapping, 60000);
         });    
         }
         catch(error){
