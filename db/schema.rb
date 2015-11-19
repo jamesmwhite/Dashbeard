@@ -11,13 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150805103701) do
+ActiveRecord::Schema.define(version: 20151119090917) do
 
   create_table "data_caches", force: :cascade do |t|
     t.string   "stock"
-    t.string   "rss"
-    t.string   "bus"
-    t.string   "train"
+    t.text     "rss"
+    t.text     "bus"
+    t.text     "train"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "stockDate"

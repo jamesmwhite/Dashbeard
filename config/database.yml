@@ -22,4 +22,10 @@ test:
 
 production:
   <<: *default
-  database: db/production.sqlite3
+  adapter: mysql2
+  database: dashboard
+  username: 
+  password: 
+  reconnect: true
+  host: 127.0.0.1
+  port: 8889
