@@ -34,63 +34,37 @@ class BusController < ApplicationController
 	  	end
 	  	goLive = true
 	  	if goLive
-
-			oldurl = "http://whensmybus.buseireann.ie/internetservice/services/passageInfo/stopPassages/stop"
 			url = "http://www.buseireann.ie/inc/proto/stopPassageTdi.php?stop_point=6350786630982438745"
 			begin
 				htmlresp = ""
 				uri = URI.parse("http://whensmybus.buseireann.ie")
 				http = Net::HTTP.new(uri.host, uri.port)
 				http.use_ssl = false
-				# request = Net::HTTP::Post.new("/internetservice/services/passageInfo/stopPassages/stop")
-
-				# stopNum = 135001 # busaras default			
-				# begin
-				# 	setting = Setting.take
-				# 	if not setting.busstopcode.empty?
-				# 		stopNum = setting.busstopcode
-				# 	end
-				# rescue Exception => ee
-				# 	puts ee
-				# end
-
-				# request.body = "stop=#{stopNum}&mode=departure"
-				# response = http.request(request)
 				response = Net::HTTP.get(URI.parse(url))	
 				# puts response
 				parsed = JSON.parse(response)
+				bussArr = Array.new 
 				for p in parsed['stopPassageTdi']
 					for a in p
 						# puts a
 						# puts "status: #{a['status']}"
 						begin
-							if a['departure_data'] and a['status'] and a['status']==1
+							if a['departure_data'] and a['status'] #and a['status']!=4
 								item = a['departure_data'] 
-
-								# puts item.class.name
-								# item.each_key do |key|
-								# 	puts "#{key}" # prints each key.
-								# end
 								actualtime =  item['actual_passage_time_utc']
-								destination = item['multilingual_direction_text']['defaultValue']
 								scheduleTime = item['scheduled_passage_time_utc']
-								# puts destination
+								destination = item['multilingual_direction_text']['defaultValue']
 								begin
 									if actualtime
-										humanTime =  Time.at(actualtime).strftime("%H:%M")
+										epoch = actualtime# Time.at(actualtime).strftime("%H:%M")
 									else
-										humanTime =  Time.at(scheduleTime).strftime("%H:%M")
+										epoch = scheduleTime# Time.at(scheduleTime).strftime("%H:%M")
 									end
 								rescue Exception => e
 									puts e.backtrace
 								end
-								puts "#{destination} will depart at #{humanTime} with status #{a['status']}"
-								# puts "#{destination} will depart at "
-								
-
-
-								# puts bla.class.name
-								# puts bla['actual_passage_time_utc']
+								traintext = "#{epoch}: to #{destination}"
+								bussArr.push traintext 
 							end
 						rescue Exception => e
 							# puts p
@@ -99,19 +73,21 @@ class BusController < ApplicationController
 
 					end
 				end
-
-
-				# htmlresp = "<h2>Busaras Departures</h2>"
-    #     htmlresp = "#{htmlresp}<h3 class=\"bus-time-line\"><span class=\"bus-departing\">Destination</span><span class=\"bus-planned\">Planned Time</span><span>Actual Time</span></h3>"
-				# for item in actuals
-    #       actualItem = "<span>&nbsp</span>"
-    #       unless item["actualTime"].nil?
-    #         actualItem = "<span class=\"livetime\">#{item["actualTime"]}</span>"
-    #       end
-				# 	htmlresp = "#{htmlresp} <div class=\"bus-time-line\"><span class=\"bus-departing\">#{item["direction"]}</span><span class=\"bus-planned\">#{item["plannedTime"]}</span>#{actualItem}</div>"
-				# end
+				busComArr = Array.new
+				htmlresp = "<h2>Busaras Departures</h2>"
+				for bus in bussArr.sort
+					splitbus = bus.split(': to')
+					deptTime = Time.at(splitbus[0].to_i).strftime("%H:%M")
+					if deptTime > Time.now
+						puts "#{deptTime}:#{splitbus[1]}"
+						busComArr.push "<div class=\"train-time-line\"><div class=\"train-departing\">#{deptTime}:#{splitbus[1]}</div></div>"
+						htmlresp = "#{htmlresp} <div class=\"train-time-line\"><div class=\"train-departing\">Departing: <span class=\"livetime\">#{deptTime}</span></div><div class=\"journey-time\">#{splitbus[1]}</div></div>"
+					end
+				end
+				htmlresp = "#{htmlresp} </br>"
 
 			rescue Exception => e
+				puts e
 				puts e.backtrace
 			end
 
