@@ -48,13 +48,13 @@ swapContent = function(){
 	}
 }
 </script>
-
+<!--
 <div id="otherContent">
   <div id="fe_image"></div>
 
 <img id="otherImage" src="" >
 </div>
-
+-->
 <div id="normalContent">
   <div id="header" class="header">
     <div class="fe_image"><%= image_tag 'logo.png' %></div>
@@ -107,7 +107,10 @@ callRss = function(){
     dynamic_change("/rss","rss",20000,callNotices,true);
 };
 callNotices = function(){
-    dynamic_change("/notices","rss",20000,callRss,true);
+    dynamic_change("/notices","rss",20000,callImages,true);
+};
+callImages = function(){
+    changeImageNew();
 };
 
 // initial order of elements on screen to load 
@@ -128,6 +131,6 @@ $('h3').marquee({ speed: 50 });
 </div>
 
 <script>
-organiseSwapping();
+// organiseSwapping();
 </script>
 

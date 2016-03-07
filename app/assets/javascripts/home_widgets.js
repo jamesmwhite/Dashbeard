@@ -121,6 +121,21 @@ dynamic_change = function (fetch_url,html_el,time_delay,next_func,replace) {
         setTimeout(changeImage, phototime);
     }
 
+    changeImageNew = function(){
+        if(images.length>0){
+            // document.getElementById("otherImage").src=images[curNum];
+            $("#rss").html('<img id="otherImage" width="100%" src="'+images[curNum]+'" >');                    
+        }
+        curNum = curNum + 1;    
+        if(curNum < images.length){
+            setTimeout(changeImageNew, phototime);
+        }
+        else{
+            curNum = 0;
+            setTimeout(callRss, phototime);
+        }
+    }
+
 
     loadImageRotation = function() {
 
@@ -158,7 +173,7 @@ dynamic_change = function (fetch_url,html_el,time_delay,next_func,replace) {
             
         })
         .always(function () {
-            changeImage();
+            // changeImage();   
         });  
     }
 
